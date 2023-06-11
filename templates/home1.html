@@ -1,0 +1,516 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+	<title>TemplateXYZ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Get answers to all your questions from our expert community.">
+	<meta name="google-site-verification" content="wKCxNAAAVnIXlibxxzWpfQtTB4rVdwjhJ0HpSNbAepk" />
+	{% comment %} <link rel="icon" href="images/icon.jpg"> {% endcomment %}
+	{% comment %} <link rel="stylesheet" type="text/css" href="../static/css/index.css"> {% endcomment %}
+    <style>
+        /* Reset styles */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+/* Global styles */
+body {
+	font-family: Arial, sans-serif;
+	color: #333;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.logo-img{
+  width: 100px;
+}
+
+/* Header styles */
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+}
+
+header img {
+	float: left;
+}
+
+nav {
+	float: right;
+}
+
+nav ul {
+	list-style: none;
+}
+
+nav ul li {
+	float: left;
+	margin-left: 20px;
+}
+
+nav ul li a {
+	display: block;
+	padding: 10px;
+	color: #fff;
+}
+
+nav ul li a:hover {
+	background-color: #555;
+}
+
+/* Menu button styles */
+.menu-btn {
+	display: none;
+	float: right;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.menu-btn span {
+	display: block;
+	height: 3px;
+	background-color: #fff;
+	margin-bottom: 5px;
+}
+
+/* Hero section styles */
+.hero {
+	background-color: #f2f2f2;
+	padding: 100px 20px;
+	text-align: center;
+}
+
+.hero h2 {
+	margin-bottom: 20px;
+	font-size: 36px;
+}
+
+.hero p {
+	margin-bottom: 40px;
+	font-size: 18px;
+}
+
+.btn{
+  border: none;
+  outline: none;
+}
+
+.btn a {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.btn a:hover {
+	background-color: #555;
+}
+
+/* Categories section styles */
+.categories {
+	background-color: #fff;
+	padding: 50px 20px;
+	text-align: center;
+}
+
+.categories h3 {
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.category-item {
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.category-item a {
+	display: block;
+	padding: 10px;
+	border: 1px solid #333;
+	border-radius: 3px;
+	font-size: 18px;
+}
+
+.category-item a:hover {
+	background-color: #333;
+	color: #fff;
+}
+
+/* Featured section styles */
+.featured {
+	background-color: #f2f2f2;
+	padding: 50px 20px;
+	text-align: center;
+}
+
+.featured h3 {
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.question {
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.question h4 {
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+.question a {
+	color: #333;
+}
+
+.question a:hover {
+	color: #555;
+}
+
+.question p.user {
+	font-size: 16px;
+	color: #999;
+	margin-top: 5px;
+}
+
+.banner2 {
+      background: #ECECEC;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    /* CSS styles for the tagline */
+    .banner2 > p {
+      font-size: 24px;
+      margin: 0;
+      font-weight: bold;
+    }
+    /* CSS styles for the card container */
+    .card-container2 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    /* CSS styles for individual cards */
+    .card2 {
+      width: 350px;
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    /* CSS styles for the image */
+    .card2 img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    
+    /* CSS styles for the title */
+    .card2 h2 {
+      margin-top: 10px;
+    }
+    
+    /* CSS styles for the description */
+    .card2 p {
+      margin-top: 10px;
+    }
+
+/* Responsive styles */
+@media screen and (max-width: 767px) {
+	nav {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		background-color: #333;
+	}
+
+	nav ul {
+		display: block;
+	}
+
+	nav ul li {
+		float: none;
+		display: block;
+	}
+
+	nav ul li a {
+		display: block;
+		padding: 10px;
+		border-bottom: 1px solid #555;
+	}
+
+	.menu-btn {
+		display: block;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
+	.menu-btn span {
+		display: block;
+		width: 25px;
+		height: 3px;
+		background-color: #fff;
+		margin-bottom: 5px;
+	}
+
+	/* Rotate first and third span to create "X" icon for close */
+	.menu-btn span:nth-of-type(1) {
+		transform: rotate(45deg);
+		top: 0;
+		left: 0;
+	}
+
+	.menu-btn span:nth-of-type(2) {
+		opacity: 0;
+	}
+
+	.menu-btn span:nth-of-type(3) {
+		transform: rotate(-45deg);
+		top: 0;
+		right: 0;
+	}
+
+	nav.active {
+		display: block;
+	}
+}
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-links, .footer-contact, .footer-subscribe {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.footer-links h3, .footer-contact h3, .footer-subscribe h3 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-links ul, .footer-contact ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-subscribe form {
+  display: flex;
+}
+
+.footer-subscribe input[type="email"] {
+  width: 100%;
+  padding: 5px;
+  outline: 0px;
+  color: #fff;
+}
+
+.footer-subscribe button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.footer-copyright {
+  text-align: center;
+  width: 100%;
+}
+    </style>
+</head>
+<body>
+	<header>
+		<div class="container">
+			<img src="images/logo.jpg" class="logo-img" alt="TemplateXYZ logo">
+			<nav>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="about.html">About Us</a></li>
+					<li><a href="ask.html">Ask Question</a></li>
+				</ul>
+			</nav>
+			<div class="menu-btn">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero">
+			<div class="container">
+				<h2>Welcome to TemplateXYZ</h2>
+				<p>Get answers to all your questions from our expert community</p>
+				<button class="btn"><a href="ask.html">Ask a Question</a></button>
+			</div>
+		</section>
+
+<div class="banner2">
+    <p>Explore Our Free Templates</p>
+  <div class="card-container2">
+    <a href='template/online-education-website-template-learn-anytime-anywhere'>
+    <div class="card2">
+      <img src='template-image/../template-image/SLCuJRzjHs.png' alt="Template Image">
+      <h2>Online Education Website Template - Learn Anytime, Anywhere</h2>
+    </div></a>
+    <a href='template/searchx-responsive-google-search-result-page-template'>
+    <div class="card2">
+      <img src='template-image/../template-image/JIebCfeiat.png' alt="Template Image">
+      <h2>SearchX - Responsive Google Search Result Page Template</h2>
+    </div></a>
+    <a href='template/knowlypedia-free-wikipedia-clone-html-template'>
+    <div class="card2">
+      <img src='template-image/../template-image/SpnpGrgqYP.png' alt="Template Image">
+      <h2>Knowlypedia - Free Wikipedia Clone HTML Template</h2>
+    </div></a>
+    <a href='template/cryptoinvest-responsive-cryptocurrency-investment-template'>
+    <div class="card2">
+      <img src='template-image/../template-image/cGUuCsIZUd.png' alt="Template Image">
+      <h2>CryptoInvest - Responsive Cryptocurrency Investment Template</h2>
+    </div></a>
+    <a href='template/insectarium-a-captivating-html-template-for-insect-exhibitions'>
+    <div class="card2">
+      <img src='template-image/../template-image/IgaBRaQBrm.png' alt="Template Image">
+      <h2>Insectarium: A Captivating HTML Template for Insect Exhibitions</h2>
+    </div></a>
+      </div>
+  </div>
+
+<section class="categories">
+			<div class="container">
+				<h3>Categories</h3>
+				<div class="category-item">
+					<a href="tag/html">HTML</a>
+				</div>
+				<div class="category-item">
+					<a href="tag/css">CSS</a>
+				</div>
+				<div class="category-item">
+					<a href="tag/javascript">JavaScript</a>
+				</div>
+				<div class="category-item">
+					<a href="tag/jquery">jQuery</a>
+				</div>
+		  	<div class="category-item">
+					<a href="tag/php">PHP</a>
+				</div>
+				<div class="category-item">
+					<a href="tag/mysql">MySQL</a>
+				</div>
+				<div class="category-item">
+					<a href="tag/tensorflow.js">Tensorflow.js</a>
+				</div>
+				<div class="category-item">
+					<a href="tag/otherjs">Other JavaScript Libraries</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="featured">
+			<div class="container">
+				<h3>Featured Questions</h3>
+				
+				<div class="question">
+					<h4><a href='article/dynamic-responsive-carousel-with-api-fetching-and-touch-gestures'>Dynamic Responsive Carousel with API Fetching and Touch Gestures</a></h4>
+					<p class="user">Asked by Team_Jack</p>
+				</div>
+			 				<div class="question">
+					<h4><a href='article/dynamic-responsive-carousel-with-api-fetching-and-touch-gestures'>Dynamic Responsive Carousel with API Fetching and Touch Gestures</a></h4>
+					<p class="user">Asked by Team_Jack</p>
+				</div>
+			 				<div class="question">
+					<h4><a href='article/dynamic-responsive-carousel-with-api-fetching-and-touch-gestures'>Dynamic Responsive Carousel with API Fetching and Touch Gestures</a></h4>
+					<p class="user">Asked by Team_Jack</p>
+				</div>
+			 				<div class="question">
+					<h4><a href='article/interactive-webgl-animation-custom-geometric-patterns-with-three-js'>Interactive WebGL Animation: Custom Geometric Patterns with Three.js</a></h4>
+					<p class="user">Asked by Attack_Now</p>
+				</div>
+			 				<div class="question">
+					<h4><a href='article/building-a-code-editor-with-prism-js-and-recording-replaying-features'>Building a Code Editor with Prism.js and Recording/Replaying Features</a></h4>
+					<p class="user">Asked by Team_Jack</p>
+				</div>
+			 			</div>
+		</section>
+	</main>
+	
+	<footer>
+  <div class="footer-links">
+    <h3>Links</h3>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="policy.html">Policy Page</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-contact">
+    <h3>Contact Information</h3>
+    <ul>
+      <li>Email: info@templatexyz.xyz</li>
+      <li>Address: Mirpur, Dhaka, Bangladesh</li>
+    </ul>
+  </div>
+
+  <div class="footer-subscribe">
+    <h3>Subscribe</h3>
+    <form action="subscribe.php" method="post">
+      <input type="email" placeholder="Enter your email" name="email">
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+
+  <div class="footer-copyright">
+    <p>&copy; 2023 TemplateXYZ. All rights reserved.</p>
+  </div>
+</footer>
+
+	<script src="scripts/script.js"></script>
+</body>
+</html>
