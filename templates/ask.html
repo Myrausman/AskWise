@@ -14,22 +14,31 @@
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(217, 54, 54)">
+  <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(217, 54, 54)">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <h3 class="navbar-brand text-white">AskWise</h3>
+        <form class="d-flex mx-auto">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
+          <button type="button" class="btn btn-primary ml-3">
+            <i class="fa fa-plus"></i> New thread
+          </button>
+        </div>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Topics</a>
+            <a class="nav-link text-white" href="#">My Topics</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Profile
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -43,7 +52,12 @@
       </div>
     </div>
   </nav>
-  
+  <div class="d-flex flex-wrap justify-content-center justify-content-rg-end align-items-center">
+    <h1> </h1>
+  </div>
+  <hr class="m-0">
+           <div class="card-body py-3">
+              <div class="row no-gutters align-items-center"> 
 
   <!-- Content Section -->
   <section class="container my-5">
@@ -65,11 +79,13 @@
       <button type="submit" class="btn btn-primary">Submit Question</button>
     </form>
   </section>
-
+</div>
+</div>
+<hr class="m-0">
   <!-- Footer -->
   <footer class="bg-dark text-light text-center py-3">
     <div class="container">
-      <p>&copy; 2023 Q&A Website. All rights reserved.</p>
+      <p>&copy; 2023 Q&A Website. All rights reserved by Hamna and Maira.</p>
     </div>
   </footer>
 

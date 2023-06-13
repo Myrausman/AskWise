@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 
 # Create your views here.
 def home(request):
     return render(request, 'index.html', {})
+def ask_view(request):
+    return render(request, 'ask.html', {})
