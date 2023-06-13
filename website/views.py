@@ -5,3 +5,5 @@ def home(request):
     return render(request, 'index.html', {})
 def ask_view(request):
     return render(request, 'ask.html', {})
+def mytopics_view(request):
+    return render(request, 'mytopics.html', {})
