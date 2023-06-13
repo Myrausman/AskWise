@@ -20,19 +20,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <h3 class="navbar-brand text-white">AskWise</h3>
-        <form class="d-flex mx-auto">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">Search</button>
-        </form>
+        <div class ="text-white mb-5 mb-lg-0 "><h2>AskWise</h2></div>
+
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
-          <button type="button" class="btn btn-primary ml-3">
-            <i class="fa fa-plus"></i> New thread
-          </button>
+
         </div>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+            <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">My Topics</a>
@@ -52,33 +47,33 @@
       </div>
     </div>
   </nav>
-  <div class="d-flex flex-wrap justify-content-center justify-content-rg-end align-items-center">
-    <h1> </h1>
-  </div>
-  <hr class="m-0">
-           <div class="card-body py-3">
-              <div class="row no-gutters align-items-center"> 
 
+
+
+  <!-- navbar close-->
+  <hr class="m-1">
+           <div class="card-body py-0">
+              <div class="row no-gutters align-items-center"> 
   <!-- Content Section -->
-  <section class="container my-5">
-    <h1>Ask a Question</h1>
-    <form>
-      <div class="mb-3">
-        <label for="questionTitle" class="form-label">Question Title</label>
-        <input type="text" class="form-control" id="questionTitle" placeholder="Enter your question title" name="questionTitle">
-      </div>
-      <div class="mb-3">
-        <label for="questionDetails" class="form-label">Question Details</label>
-        <textarea class="form-control" id="questionDetails" rows="5" placeholder="Enter your question details" name="questionDetails"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="tags" class="form-label">Tags</label>
-        <input type="text" class="form-control" id="tags" placeholder="Enter tags separated by commas" name="tags">
-        <small id="tagsHelp" class="form-text text-muted">Add relevant tags to help others find your question.</small>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit Question</button>
-    </form>
-  </section>
+    <section class="container my-5">
+        <h1>Ask a Question</h1>
+        <form>
+          <div class="mb-3">
+            <label for="questionTitle" class="form-label">Question Title</label>
+            <input type="text" class="form-control" id="questionTitle" placeholder="Enter your question title" name="questionTitle">
+          </div>
+          <div class="mb-3">
+            <label for="questionDetails" class="form-label">Question Details</label>
+            <textarea class="form-control" id="questionDetails" rows="5" placeholder="Enter your question details" name="questionDetails"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <input type="text" class="form-control" id="tags" placeholder="Enter tags separated by commas" name="tags">
+            <small id="tagsHelp" class="form-text text-muted">Add relevant tags to help others find your question.</small>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Question</button>
+        </form>
+    </section>
 </div>
 </div>
 <hr class="m-0">
