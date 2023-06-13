@@ -17,22 +17,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <h3 class="navbar-brand text-white">AskWise</h3>
+         <div class ="text-white mb-5 mb-lg-0 "><h2>AskWise</h2></div>
           <form class="d-flex mx-auto">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
-          </form>
+            <input class="form-control me-2 col-lg-7 aria-hidden="true"" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light " type="submit">Search</button>
+          </form> 
           <div class="d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
             <a href="{% url 'ask_view' %}" class="btn btn-primary ml-3">
               <i class="fa fa-plus"></i> New thread
             </a>
           </div>
+
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'mytopics_view' % }">My Topics</a>
+              <a class="nav-link text-white" href="{% url 'mytopics_view' %}">My Topics</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,12 +50,13 @@
         </div>
       </div>
     </nav>
+
     <div class="d-flex flex-wrap justify-content-center justify-content-rg-end align-items-center">
       <h1> </h1>
     </div>
-    
-    
-
+      <!-- navbar close-->
+   
+    <h1></h1>
     <div class="container-fluid mt-100" style="background-color: rgb(217, 54, 54)">
       <div class="card mb-3">
         <div class="card-header pl-0 pr-0">
