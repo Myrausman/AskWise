@@ -1,65 +1,22 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <style>
-        body {
-          background: #eee;
-          color: #708090;
-        }
-    
-        .tags-section {
-          margin: 20px 0;
-        }
-    
-        .tag-button {
-          background-color: #fff;
-          border: 1px;
-          color: #007bff;
-          cursor: pointer;
-          text-decoration: none;
-          padding: 0;
-        }
-    
-        .tag-button:focus,
-        .tag-button:hover {
-          text-decoration: none;
-          box-shadow: none;
-        }
-    
-        .tag-badge {
-          padding: 0.375rem 0.75rem;
-          font-size: 0.875rem;
-          font-weight: 600;
-          line-height: 1.5;
-          border-radius: 9999px;
-          background-color: #36454F;
-          color: #fff;
-        }
-    .hr{
-        width:2px;
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>AskWise</title>
+<style>
+    .form-group{
+        height:170px;
     }
-        .container-border {
-          border: 2px solid #ccc;
-  padding: 10px;
-  width: 1100px;
-  margin-bottom: 10px;
-  margin-left: 2px;
-        }
-    
-       /* .container{
-            margin-left:10px;
-        }  */
-
-      </style>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    {% comment %} <link rel="stylesheet" type="text/css" href="../static/css/index.css"> {% endcomment %}
-    <title>Homepage</title>
-
+    .answer{
+        height:100px;
+    }
+</style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(217, 54, 54)">
@@ -96,95 +53,91 @@
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                 </ul>
-        
-                
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
-      <br></br>
-  
-
-<!-- Question and Answers -->
-<div class="container">
+ 
+  <!-- Question and Answers -->
+  <div class="container">
     <!-- Question Title and Description -->
-    <div class="col-md-10">
-    <div class="jumbotron container-border">
+    <div class="jumbotron border">
       <h1>Dynamic HTML Table: Bootstrap, PHP, MySQL, JS/jQuery Filtering</h1>
       <p>How would you dynamically generate a responsive HTML table using Bootstrap, populate it with data retrieved from a MySQL database using PHP, and then apply client-side filtering functionality using JavaScript and jQuery?</p>
       <i>Asked by: Web_Is_Fun</i>
-      <div class="tags-section">
-        <div class="d-flex flex-wrap">
-          <a href="../tag/html" class="tag-button">
-            <span class="tag-badge">html</span>
-          </a>
-          <a href="../tag/bootstrap" class="tag-button">
-            <span class="tag-badge">bootstrap</span>
-          </a>
-          <a href="../tag/javascript" class="tag-button">
-            <span class="tag-badge">javascript</span>
-          </a>
-          <a href="../tag/jquery" class="tag-button">
-            <span class="tag-badge">jquery</span>
-          </a>
-          <a href="../tag/php" class="tag-button">
-            <span class="tag-badge">php</span>
-          </a>
-          <a href="../tag/mysql" class="tag-button">
-            <span class="tag-badge">mysql</span>
-          </a>
-        </div>
-      </div>
-    </div>
-    </div>
-    <br>
-  
-   <!-- Answers -->
-   <div class="row container-border">
-    <div class="col-md-10">
-      <h2>Answers:</h2>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p>
-            ANswer1
-          </p>
-          <p>
-            Next, let's assume you have a PHP file that retrieves data from your MySQL database.
-          </p>
-          <i>Answered by: CopyMan</i>
-        </div>
-      </div>
+      
     </div>
   </div>
-  <!-- Answer Editor -->
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="form-group">
-            <label for="answer">Your Answer:</label>
-            <div id="answer"></div>
-          </div>
-          <button class="btn btn-primary">Post Your Answer</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="form-group">
-            <label for="answer">Your Answer:</label>
-            <input class="form-control me-2 col-lg-7" type="answer" placeholder="Your Answer" aria-label="Your Answer" style="height: 150px;">
+<br>
+  <div class="container">
+    <!-- Answers -->
 
+      <div class="col-md-12 container border ">
+        <h2>Answers:</h2>
+        <hr> <!-- Section separator -->
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>
+                Answer 2
+              </p>
+              <p>
+                Another answer goes here.
+              </p>
+              <i>Answered by: AnotherUser</i>
+            </div>
           </div>
-          <br>
-          <button class="btn btn-primary">Post Your Answer</button>
+        </div>
+        <hr> <!-- Section separator -->
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>
+                Answer 2
+              </p>
+              <p>
+                Another answer goes here.
+              </p>
+              <i>Answered by: AnotherUser</i>
+            </div>
+          </div>
+        </div>
+      <hr> <!-- Section separator -->
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              Answer 2
+            </p>
+            <p>
+              Another answer goes here.
+            </p>
+            <i>Answered by: AnotherUser</i>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+<br>
+  <!-- Answer Editor -->
+  <div class="row ">
+    <div class="col-md-12 ">
+      <div class="panel panel-default container">
+        <div class="panel-body ">
+          <form>
+            <div class="form-group ">
+              <label for="answer"><h2>Your Answer:</h2></label>
+              <input type="text" class="form-control answer" id="answer" placeholder="Enter your answer">
+            </div>
+            <button type="submit" class="btn btn-primary">Post Your Answer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Related Suggested Pages -->
- 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-9UnhJkSBymEKJw5Yb+01/QaD/Y4n7SF5zGs4yeaL4pDIi0W04OycEd+kWz9vfzYCTYnRIN6o7SSnbNGBo2KIFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
