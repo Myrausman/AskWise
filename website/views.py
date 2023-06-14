@@ -7,5 +7,7 @@ def ask_view(request):
     return render(request, 'ask.html', {})
 def mytopics_view(request):
     return render(request, 'mytopics.html', {})
-def detail(request):
-    return render(request, 'details.html', {})
+def register(request):
+    return render (request,'register.html',{})
+def details(request):
+    return render (request,'details.html',{})
