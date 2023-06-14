@@ -151,19 +151,14 @@
     <div class="white-panel">
       <div class="login-show">
         <h2>LOGIN</h2>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="button" value="Login">
-        <a href="">Forgot password?</a>
+		<form method="POST" action="{% url 'home' %}">
+			{% csrf_token %}
+        <input type="text" placeholder="Email" name='email'>
+        <input type="password" placeholder="Password" name='pwd'>
+        <input type="submit" value="Login">
+       </form>
       </div>
-      {% comment %} <div class="register-show">
-        <h2>REGISTER</h2>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm Password">
-        <input type="button" value="Register">
-      </div>
-    </div> {% endcomment %}
+     
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

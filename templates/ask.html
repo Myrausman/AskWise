@@ -60,6 +60,8 @@
         <form>
           <div class="mb-3">
             <label for="questionTitle" class="form-label">Question Title</label>
+            <form method="POST" action="{% url 'details' %}">
+              {% csrf_token %}
             <input type="text" class="form-control" id="questionTitle" placeholder="Enter your question title" name="questionTitle">
           </div>
           <div class="mb-3">
@@ -69,7 +71,7 @@
           <div class="mb-3">
             <label for="tags" class="form-label">Tags</label>
             <input type="text" class="form-control" id="tags" placeholder="Enter tags separated by commas" name="tags">
-            <small id="tagsHelp" class="form-text text-muted">Add relevant tags to help others find your question.</small>
+            <small id="tagsHelp" class="form-text text-muted" >Add relevant tags to help others find your question.</small>
           </div>
           <button type="submit" class="btn btn-primary">Submit Question</button>
         </form>
