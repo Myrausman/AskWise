@@ -7,8 +7,8 @@ def home(request):
             login = Login.objects.filter(email=request.POST.get('email')).first()
             return render(request, 'index.html', {'email':login.email,'login':True})
     return render(request, 'index.html', {})
-def ask_view(request,email):
-    return render(request, 'ask.html', {"email":email})
+def ask_view(request):
+    return render(request, 'ask.html', {})
 def mytopics_view(request):
     
     return render(request, 'mytopics.html')
