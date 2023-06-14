@@ -7,9 +7,73 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    {% comment %} <link rel="stylesheet" type="text/css" href="../static/css/index.css"> {% endcomment %}
-    <title>Homepage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskWise</title>
+    <style>
+        body {
+          background: #eee;
+          color: #708090;
+        }
 
+        .tags-section {
+          margin: 20px 0;
+        }
+
+        .tag-button {
+          background-color: #fff;
+          border: 1px;
+          color: #007bff;
+          cursor: pointer;
+          text-decoration: none;
+          padding: 0;
+        }
+
+        .tag-button:focus,
+        .tag-button:hover {
+          text-decoration: none;
+          box-shadow: none;
+        }
+
+        .tag-badge {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+          font-weight: 600;
+          line-height: 1.5;
+          border-radius: 9999px;
+          background-color: #36454F;
+          color: #fff;
+        }
+
+        .hr {
+          width: 2px;
+          background-color: black;
+          height: 20px;
+          margin: 10px;
+        }
+
+        .container-border {
+          border: 2px solid #ccc;
+          padding: 10px;
+          width: 100%;
+          margin-bottom: 10px;
+        }
+
+        .container {
+          margin: 10px;
+        }
+
+        .answer-container {
+          border: 2px solid #ccc;
+          padding: 10px;
+          margin-bottom: 10px;
+          margin:0 auto;
+          width: 1200px; 
+            height:100px;
+
+        }
+ 
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(217, 54, 54)">
@@ -47,16 +111,15 @@
                   <li><a class="dropdown-item" href="#">Settings</a></li>
                 </ul>
         
-                /div>
+            </div>
       </nav>
-      <br></br>
+      <br>
   
 
-<!-- Question and Answers -->
-<div class="container">
+ <!-- Question and Answers -->
+ <div class="row container justify-content-center">
     <!-- Question Title and Description -->
-    <div class="col-md-10">
-    <div class="jumbotron container-border">
+    <div class="jumbotron container-border justify-content-center">
       <h1>Dynamic HTML Table: Bootstrap, PHP, MySQL, JS/jQuery Filtering</h1>
       <p>How would you dynamically generate a responsive HTML table using Bootstrap, populate it with data retrieved from a MySQL database using PHP, and then apply client-side filtering functionality using JavaScript and jQuery?</p>
       <i>Asked by: Web_Is_Fun</i>
@@ -83,40 +146,60 @@
         </div>
       </div>
     </div>
-    </div>
-    <br>
+  </div>
   
-   <!-- Answers -->
-   <div class="row container-border">
-    <div class="col-md-10">
-      <h2>Answers:</h2>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p>
-            ANswer1
-          </p>
-          <p>
-            Next, let's assume you have a PHP file that retrieves data from your MySQL database.
-          </p>
-          <i>Answered by: CopyMan</i>
+  <div class="container">
+    <!-- Answers -->
+    <div class="row container-border">
+      <div class="col-md-12">
+        <h2>Answers:</h2>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              Answer 1
+            </p>
+            <p>
+              Next, let's assume you have a PHP file that retrieves data from your MySQL database.
+            </p>
+            <i>Answered by: CopyMan</i>
+          </div>
+        </div>
+      </div>
+      <hr class="hr"> <!-- Section separator -->
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              Answer 2
+            </p>
+            <p>
+              Another answer goes here.
+            </p>
+            <i>Answered by: AnotherUser</i>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Answer Editor -->
-  <div class="row">
+<!-- Answer Editor -->
+<div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-body">
-          <div class="form-group">
-            <label for="answer">Your Answer:</label>
-            <div id="answer"></div>
-          </div>
-          <button class="btn btn-primary">Post Your Answer</button>
+          <form>
+            <div class="form-group">
+              <label for="answer">Your Answer:</label>
+
+                <input type="text" class="form-control answer-container" id="answer" placeholder="Enter your answer">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Post Your Answer</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+  
   <!-- Related Suggested Pages -->
  
 </div>
