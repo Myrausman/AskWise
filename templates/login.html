@@ -134,6 +134,7 @@
   </style>
 </head>
 <body>
+  
   <div class="login-reg-panel">
     <div class="login-info-box">
       <h2>Have an account?</h2>
@@ -146,23 +147,25 @@
       <h2>Don't have an account?</h2>
       <p>Lorem ipsum dolor sit amet</p>
       <a href="{% url 'register' %}">
-      <input type="button" value="Register"></a>
+        <input type="button" value="Register">
+      </a>
     </div>
 
     <div class="white-panel">
       <div class="login-show">
         <h2>LOGIN</h2>
-		<form method="POST" action="{% url 'home' %}">
-			{% comment %} {% csrf_token %} {% endcomment %}
-        <input type="text" placeholder="Email" name='email'>
-        <input type="password" placeholder="Password" name='pwd'>
-        <input type="submit" value="Login">
-       </form>
+        <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          <input type="text" placeholder="Email" name='email'>
+          <input type="password" placeholder="Password" name='password'>
+          <input type="submit" value="Login">
+        </form>
       </div>
-     
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

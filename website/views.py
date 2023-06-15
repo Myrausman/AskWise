@@ -6,6 +6,11 @@ from django.http import JsonResponse
 import json
 import sqlite3,os,datetime,random,string
 from pathlib import Path
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+import sqlite3
+import random
+import string
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,9 +29,38 @@ def ask_view(request):
 def mytopics_view(request):
     
     return render(request, 'mytopics.html')
+@csrf_exempt
+
+
 def login(request):
-    # if request.method=='Get':
-    return render (request,'login.html',{})
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE email=?", (email,))
+            user_det = cursor.fetchone()
+            print(user_det)
+            
+            if user_det is not None:
+                db_email, db_password = user_det[2],user_det[3]
+                print('here')
+                print('\n'*20)
+                print(db_email, db_password) # Extract email and password from the fetched user details
+                if password == db_password:
+                    # Login successful, proceed with further actions
+                    return render(request, 'index.html')
+                else:
+                    # Incorrect password
+                    return render(request, 'login.html', {'error': 'Incorrect password'})
+            else:
+                # User not found
+                return render(request, 'login.html', {'error': 'User not found'})
+    
+    return render(request, 'login.html')
+
+
 
 
 @csrf_exempt
