@@ -1,7 +1,6 @@
 # <-------------------imports---------------->
 from django.shortcuts import render,redirect,get_object_or_404
 import random
-from database.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
@@ -12,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #<----------- Create your views here.--------->
 def home(request):
-    if request.method == 'POST':
-            login = Login.objects.filter(email=request.POST.get('email')).first()
-            return render(request, 'index.html', {'email':login.email,'login':True})
+    # if request.method == 'POST':
+            # login = Login.objects.filter(email=request.POST.get('email')).first()
+            # return render(request, 'index.html', {'email':login.email,'login':True})
     return render(request, 'index.html', {})
 
 
@@ -26,13 +25,9 @@ def mytopics_view(request):
     
     return render(request, 'mytopics.html')
 def login(request):
+    # if request.method=='Get':
     return render (request,'login.html',{})
 
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
-import sqlite3
-import random
-import string
 
 @csrf_exempt
 def register(request):
@@ -57,16 +52,16 @@ def register(request):
 
 
 def details(request):
-    if request.method=='POST':
-         questionTitle=request.POST['questionTitle']
-         questionDetails=request.POST['questionDetails']
-         tags=request.POST['tags']
-         question=Question.objects.create(
-              title=questionTitle,
-              details=questionDetails,
-              tag=tags
-         )
-         question.save()
-         return redirect('/details')
+    # if request.method=='POST':
+    #      questionTitle=request.POST['questionTitle']
+    #      questionDetails=request.POST['questionDetails']
+    #      tags=request.POST['tags']
+    #      question=Question.objects.create(
+    #           title=questionTitle,
+    #           details=questionDetails,
+    #           tag=tags
+    #      )
+    #      question.save()
+        #  return redirect('/details')
 
     return render (request,'details.html',{})
