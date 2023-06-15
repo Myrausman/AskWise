@@ -22,18 +22,20 @@ body{
 /*-----for border----*/
 .container{
     font-family:Roboto,sans-serif;
-    background-image:url(https://www.htmlcsscolor.com/preview/gallery/BF3636.png) ; 
-    /* {% comment %} background-color:  rgb(217, 54, 54); {% endcomment %} */
+    /* {% comment %} background-image:url(https://www.htmlcsscolor.com/preview/gallery/BF3636.png) ;  {% endcomment %} */
+    background-color:   #BF3636;
     border-style: 1px solid grey;
     margin: 0 auto;
     text-align: center;
-    margin-top: 57px;
     box-shadow: 5px 5px 5px 0px #100;
     max-width: 500px;
-    padding-top: 10px;
+    padding-top: 3px;
     height: 420px;
-    margin-top: 150px;
-    over-flow:fixed;
+    overflow:fixed;
+    position:fixed;
+    top: 50%; /* Position container at the vertical center */
+    left: 50%; /* Position container at the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust position to center */
 }
 /*--- for label of first and last name---*/
 .lastname{

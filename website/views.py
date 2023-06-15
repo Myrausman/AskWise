@@ -1,12 +1,25 @@
+# <-------------------imports---------------->
 from django.shortcuts import render,redirect,get_object_or_404
 import random
 from database.models import *
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
+import sqlite3,os,datetime,random,string
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+#<----------- Create your views here.--------->
 def home(request):
     if request.method == 'POST':
             login = Login.objects.filter(email=request.POST.get('email')).first()
             return render(request, 'index.html', {'email':login.email,'login':True})
     return render(request, 'index.html', {})
+
+
+
+
 def ask_view(request):
     return render(request, 'ask.html', {})
 def mytopics_view(request):
@@ -15,6 +28,7 @@ def mytopics_view(request):
 def login(request):
     return render (request,'login.html',{})
 def register(request):
+    if request.method=='POST':
     return render (request,'register.html',{})
 def details(request):
     if request.method=='POST':

@@ -113,12 +113,12 @@ nav ul li a:hover {
 }
 
 .btn a:hover {
-	background-color: #377cc7;
+	background-color: rgb(176, 49, 30);
 }
 
 /* Categories section styles */
 .categories {
-	background-color: #fff;
+	background-color: #000000;
 	padding: 50px 20px;
 	text-align: center;
 }
