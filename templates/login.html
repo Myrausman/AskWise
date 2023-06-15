@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login and Registration</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Mukta', sans-serif;
+      height: 100vh;
+      min-height: 550px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow-y: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: #444444;
+    }
+
+    .login-reg-panel {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      width: 70%;
+      right: 0;
+      left: 0;
+      margin: auto;
+      height: 400px;
+      background-color: rgb(217, 54, 54);
+    }
+
+    .white-panel {
+      background-color: rgba(255, 255, 255, 1);
+      height: 500px;
+      position: absolute;
+      top: -50px;
+      width: 50%;
+      right: calc(50% - 50px);
+      z-index: 0;
+      box-shadow: 0 0 15px 9px #00000096;
+    }
+
+    .login-reg-panel input[type="radio"] {
+      position: relative;
+      display: none;
+    }
+
+    .login-reg-panel {
+      color: #B8B8B8;
+    }
+
+    .login-reg-panel #label-login,
+    .login-reg-panel #label-register {
+      border: 1px solid #D93636;
+      padding: 5px 5px;
+      width: 150px;
+      display: block;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .login-info-box,
+    .register-info-box {
+      width: 50%;
+      padding: 0 50px;
+      top: 20%;
+      position: absolute;
+      text-align: left;
+	  color:#fff;
+
+    }
+
+    .register-info-box {
+      right: 0;
+      left: auto;
+    }
+	.register-info-box [type="button"]{
+	background: #377cc7;
+		color: #fff;
+	}
+    .login-show,
+    .register-show {
+      z-index: 1;
+      display: block;
+      color: #D93636;
+      text-align: left;
+      padding: 50px;
+    }
+
+    .login-show input[type="text"],
+    .login-show input[type="password"],
+    .register-show input[type="text"],
+    .register-show input[type="password"] {
+      width: 100%;
+      display: block;
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #D93636;
+      outline: none;
+    }
+
+    .login-show input[type="button"]{
+		max-width: 150px;
+		width: 100%;
+		background: #377cc7;
+		color: #fff;
+		border: none;
+		padding: 10px;
+		text-transform: uppercase;
+		border-radius: 2px;
+		float: right;
+		cursor: pointer;
+	  }
+
+    .login-show a {
+      display: inline-block;
+      padding: 10px 0;
+    }
+
+  
+
+    a {
+      text-decoration: none;
+      color: #D93636;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-reg-panel">
+    <div class="login-info-box">
+      <h2>Have an account?</h2>
+      <p>Lorem ipsum dolor sit amet</p>
+      <label id="label-register" for="log-reg-show">Login</label>
+      <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+    </div>
+
+    <div class="register-info-box">
+      <h2>Don't have an account?</h2>
+      <p>Lorem ipsum dolor sit amet</p>
+      <a href="{% url 'register' %}">
+      <input type="button" value="Register"></a>
+    </div>
+
+    <div class="white-panel">
+      <div class="login-show">
+        <h2>LOGIN</h2>
+		<form method="POST" action="{% url 'home' %}">
+			{% csrf_token %}
+        <input type="text" placeholder="Email" name='email'>
+        <input type="password" placeholder="Password" name='pwd'>
+        <input type="submit" value="Login">
+       </form>
+      </div>
+     
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

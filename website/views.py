@@ -12,6 +12,8 @@ def ask_view(request):
 def mytopics_view(request):
     
     return render(request, 'mytopics.html')
+def login(request):
+    return render (request,'login.html',{})
 def register(request):
     return render (request,'register.html',{})
 def details(request):

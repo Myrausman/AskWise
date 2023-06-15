@@ -1,167 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
+<!Doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Login and Registration</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    body {
-      font-family: 'Mukta', sans-serif;
-      height: 100vh;
-      min-height: 550px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow-y: hidden;
+     <meta charset="UTF-8">
+     <title>Registration Form</title>
+     	<meta name="viewport" content="width=device-width, initial-scale=1">
+         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+         <style>
+body{
+    background-image:url(https://image.slidesdocs.com/responsive-images/slides/24-red-corporate-promotion-business-enterprise-recruitment-style-powerpoint-background_997b9b5ee1__960_540.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Added property to fix background */
+    width: 100%;
+    height: 100vh;
+    overflow:fixed;
+    
+}
+
+/*-----for border----*/
+.container{
+    font-family:Roboto,sans-serif;
+    background-image:url(https://www.htmlcsscolor.com/preview/gallery/BF3636.png) ; 
+    {% comment %} background-color:   rgb(217, 54, 54); {% endcomment %}
+    border-style: 1px solid grey;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 57px;
+    box-shadow: 5px 5px 5px 0px #100;
+    max-width: 500px;
+    padding-top: 10px;
+    height: 420px;
+    margin-top: 150px;
+    over-flow:fixed;
+}
+/*--- for label of first and last name---*/
+.lastname{
+    margin-left: 1px;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: white;
+    margin-top: 10px;
+}
+.firstname{
+    margin-left: 1px;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: white;
+    margin-top: 5px;
+}
+#lname{
+    margin-top:5px;
+}
+        
+
+/*---for heading-----*/
+.heading{
+    text-decoration:bold;
+    text-align : center;
+    font-size:30px;
+    color:#fff;
+    padding-top:10px;
+}
+/*-------for email----------*/
+    /*------label----*/
+#email{
+        margin-top: 5px;
+}
+/*-----------for Password--------*/
+    /*-------label-----*/
+.mail{
+    margin-left: 44px;
+    font-family: sans-serif;
+    color: white;
+    font-size: 14px;
+    margin-top: 13px;
+}
+.pass{
+    color: white;
+    margin-top: 9px;
+    font-size: 14px;
+    font-family: sans-serif;
+    margin-left: 6px;
+    margin-top: 9px;
+}
+#password{
+margin-top: 6px;
+}
+
+
+/*--------------for Gender---------------*/
+    /*--------------label---------*/
+.gender {
+    color: white;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 28px;
+    margin-top: 8px;
+}
+
+    /*---------- for Input type--------*/
+.col-xs-4.male{
+    color: white;
+    font-size: 13px;
+    margin-top: 9px;
+    padding-bottom: 16px;
+}
+.col-xs-4.female {
+    color: white;
+    font-size: 13px;
+    margin-top: 9px;
+    padding-bottom: 16px;
+    padding-right: 95px;
+}	
+/*------------For submit button---------*/
+.sbutton{
+    color: white;
+    font-size: 20px;
+    border: 1px solid white;
+    background-color: #080808;
+    width: 32%;
+    margin-left: 41%;
+    margin-top: 16px;
+    box-shadow: 0px 2px 2px 0px white;
+        
     }
-
-    a {
-      text-decoration: none;
-      color: #444444;
-    }
-
-    .login-reg-panel {
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: center;
-      width: 70%;
-      right: 0;
-      left: 0;
-      margin: auto;
-      height: 400px;
-      background-color: rgb(217, 54, 54);
-    }
-
-    .white-panel {
-      background-color: rgba(255, 255, 255, 1);
-      height: 500px;
-      position: absolute;
-      top: -50px;
-      width: 50%;
-      right: calc(50% - 50px);
-      z-index: 0;
-      box-shadow: 0 0 15px 9px #00000096;
-    }
-
-    .login-reg-panel input[type="radio"] {
-      position: relative;
-      display: none;
-    }
-
-    .login-reg-panel {
-      color: #B8B8B8;
-    }
-
-    .login-reg-panel #label-login,
-    .login-reg-panel #label-register {
-      border: 1px solid #D93636;
-      padding: 5px 5px;
-      width: 150px;
-      display: block;
-      text-align: center;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 18px;
-    }
-
-    .login-info-box,
-    .register-info-box {
-      width: 50%;
-      padding: 0 50px;
-      top: 20%;
-      position: absolute;
-      text-align: left;
-	  color:#fff;
-
-    }
-
-    .register-info-box {
-      right: 0;
-      left: auto;
-    }
-	.register-info-box [type="button"]{
-	background: #377cc7;
-		color: #fff;
-	}
-    .login-show,
-    .register-show {
-      z-index: 1;
-      display: block;
-      color: #D93636;
-      text-align: left;
-      padding: 50px;
-    }
-
-    .login-show input[type="text"],
-    .login-show input[type="password"],
-    .register-show input[type="text"],
-    .register-show input[type="password"] {
-      width: 100%;
-      display: block;
-      margin: 20px 0;
-      padding: 15px;
-      border: 1px solid #D93636;
-      outline: none;
-    }
-
-    .login-show input[type="button"]{
-		max-width: 150px;
-		width: 100%;
-		background: #377cc7;
-		color: #fff;
-		border: none;
-		padding: 10px;
-		text-transform: uppercase;
-		border-radius: 2px;
-		float: right;
-		cursor: pointer;
-	  }
-
-    .login-show a {
-      display: inline-block;
-      padding: 10px 0;
-    }
-
-  
-
-    a {
-      text-decoration: none;
-      color: #D93636;
-    }
-  </style>
+.btn.btn-warning:hover {
+    box-shadow: 2px 1px 2px 3px #99ccff;
+    background:#5900a6;
+    color:#fff;
+    transition: background-color 1.15s ease-in-out,border-color 1.15s ease-in-out,box-shadow 1.15s ease-in-out;
+    
+}	 
+                 
+</style>
 </head>
 <body>
-  <div class="login-reg-panel">
-    <div class="login-info-box">
-      <h2>Have an account?</h2>
-      <p>Lorem ipsum dolor sit amet</p>
-      <label id="label-register" for="log-reg-show">Login</label>
-      <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
-    </div>
 
-    <div class="register-info-box">
-      <h2>Don't have an account?</h2>
-      <p>Lorem ipsum dolor sit amet</p>
-      <input type="button" value="Register">
-    </div>
+ <div class="container">
+  
+ <!---heading---->
+     <header class="heading"> <div class ="text-white mb-5 mb-sm-0 "><h1>AskWise</h1></div>  Registration-Form</header><hr></hr>
+	<!---Form starting----> 
+	<div class="row ">
+	 <!--- For Name---->
+         <div class="col-sm-12">
+             <div class="row">
+			     <div class="col-xs-4">
+          	         <label class="firstname">First Name :</label> </div>
+		         <div class="col-xs-8">
+		             <input type="text" name="fname" id="fname" placeholder="Enter your First Name" class="form-control ">
+             </div>
+		      </div>
+		 </div>
+		 
+		 
+         <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+                     <label class="lastname">Last Name :</label></div>
+				<div class ="col-xs-8">	 
+		             <input type="text" name="lname" id="lname" placeholder="Enter your Last Name" class="form-control last">
+                </div>
+		     </div>
+		 </div>
+     <!-----For email---->
+		 <div class="col-sm-12">
+		     <div class="row">
+			     <div class="col-xs-4">
+		             <label class="mail" >Email :</label></div>
+			     <div class="col-xs-8"	>	 
+			          <input type="email" name="email"  id="email"placeholder="Enter your email" class="form-control" >
+		         </div>
+		     </div>
+		 </div>
+	 <!-----For Password and confirm password---->
+          <div class="col-sm-12">
+		         <div class="row">
+				     <div class="col-xs-4">
+		 	              <label class="pass">Password :</label></div>
+				  <div class="col-xs-8">
+			             <input type="password" name="password" id="password" placeholder="Enter your Password" class="form-control">
+				 </div>
+          </div>
+		  </div>
+		  
+     <!-----------For Phone number-------->
+         <div class="col-sm-12">
+		     <div class ="row">
+                 <div class="col-xs-4 ">
+			       <label class="gender">Gender:</label>
+				 </div>
+			 
+			     <div class="col-xs-4 male">	 
+				     <input type="radio" name="gender"  id="gender" value="boy">Male</input>
+				 </div>
+				 
+				 <div class="col-xs-4 female">
+				     <input type="radio"  name="gender" id="gender" value="girl" >Female</input>
+			     </div>
+			
+		  	 </div>
+		     <div class="col-sm-12">
+		         <div class="btn btn-warning">Submit</div>
+		   </div>
+		 </div>
+	 </div>	 
+		 		 
+		 
+</div>
 
-    <div class="white-panel">
-      <div class="login-show">
-        <h2>LOGIN</h2>
-		<form method="POST" action="{% url 'home' %}">
-			{% csrf_token %}
-        <input type="text" placeholder="Email" name='email'>
-        <input type="password" placeholder="Password" name='pwd'>
-        <input type="submit" value="Login">
-       </form>
-      </div>
-     
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+</body>		
 </html>
+	 
