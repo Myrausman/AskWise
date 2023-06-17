@@ -16,10 +16,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 userinfo=None
 #<----------- Create your views here.--------->
 def home(request):
-   
+    global userinfo
     return render(request, 'index.html',{'login':userinfo!=None})
 
-
+def logout(request):
+    global userinfo
+    userinfo=None
+    return redirect("/")
 
 
 def ask_view(request):
@@ -48,7 +51,7 @@ def login(request):
                 db_email, db_password = user_det[2],user_det[3]
                 if password == db_password:
                     userinfo=user_det
-                    return render(request, 'index.html',{'login':True,'userinfo':user_det})
+                    return redirect('/')
                 else:
                     
                     return render(request, 'login.html', {'error': 'Incorrect password'})
