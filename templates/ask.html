@@ -57,11 +57,12 @@
   <!-- Content Section -->
     <section class="container my-5">
         <h1>Ask a Question</h1>
-        <form >
+        <form method="POST" action="{% url 'ask_view' %}">
+          {% csrf_token %}
           <div class="mb-3">
             <label for="questionTitle" class="form-label">Question Title</label>
-            <form method="POST" action="{% url 'details' %}">
-              {% csrf_token %}
+            
+              
             <input type="text" class="form-control" id="questionTitle" placeholder="Enter your question title" name="questionTitle">
           </div>
           <div class="mb-3">
