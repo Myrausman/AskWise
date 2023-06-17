@@ -89,7 +89,12 @@
            <div class="card-body py-3">
               <div class="row no-gutters align-items-center">
                  <div class="col">
-                    <a href="{% url 'details' %}" class="text-big" data-abc="true">How can i change the username?</a>
+                  {% if login %}
+                     <a href="{% url 'details' %}" class="text-big" data-abc="true">How can I change the username?</a>
+                  {% else %}
+                      <a href="{% url 'login' %}" class="text-big" data-abc="true">How can I change the username?</a>
+                  {% endif %}
+                    <!-- <a href="{% url 'details' %}" class="text-big" data-abc="true">How can i change the username?</a> -->
                     <div class="text-muted small mt-1">Started 25 days ago &nbsp;&middot;&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">Neon Mandela</a></div>
                  </div>
                  <div class="d-none d-md-block col-4">
