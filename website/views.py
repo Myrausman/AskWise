@@ -108,7 +108,7 @@ def register(request):
             cursor.execute("INSERT INTO users ( fname, lname, email, password, gender) VALUES ( ?, ?, ?, ?, ?)",
                            ( first_name, last_name, email, password, gender))
 
-        return redirect('home')
+        return redirect('login')
 
     return render (request,'register.html',{})
 
