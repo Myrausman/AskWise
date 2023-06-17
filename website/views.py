@@ -13,17 +13,19 @@ import random
 import string
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-userinfo=None
-#<----------- Create your views here.--------->
+userinfo = None
+useremail = None
+
+# <----------- Create your views here.--------->
 def home(request):
     global userinfo
-    return render(request, 'index.html',{'login':userinfo!=None})
+    return render(request, 'index.html', {'login': userinfo != None})
 
 def logout(request):
-    global userinfo
-    userinfo=None
-    return redirect("/")
-
+    global userinfo, useremail
+    userinfo = None
+    useremail = None
+    return redirect("home")
 
 @csrf_exempt
 def ask_view(request):
