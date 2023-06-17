@@ -25,8 +25,28 @@ def logout(request):
     return redirect("/")
 
 
+
 def ask_view(request):
+    if request.method == 'POST':
+        title = request.POST.get('questionTitle')
+        details = request.POST.get('questionDetails')
+        tags = request.POST.get('tags')
+        
+        with sqlite3.connect('database.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO threads (title, details, user_id) VALUES (?, ?, ?)",
+                           (title, details, userinfo[0]))
+            thread_id = cursor.lastrowid
+            # Assuming tags are separated by commas and stored as a string
+            tag_list = tags.split(',')
+            for tag in tag_list:
+                cursor.execute("INSERT INTO tags (thread_id, tag) VALUES (?, ?)", (thread_id, tag.strip()))
+            
+        return redirect('/')  # Redirect to the homepage or a success page
+    
     return render(request, 'ask.html', {})
+
+
 def mytopics_view(request):
     global userinfo
     if userinfo:
