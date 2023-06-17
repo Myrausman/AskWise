@@ -13,7 +13,7 @@ import random
 import string
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+userinfo=None
 #<----------- Create your views here.--------->
 def home(request):
     # if request.method == 'POST':
@@ -27,12 +27,15 @@ def home(request):
 def ask_view(request):
     return render(request, 'ask.html', {})
 def mytopics_view(request):
-    
-    return render(request, 'mytopics.html')
+    global userinfo
+    if userinfo:
+        return render(request, 'mytopics.html',{'userinfo':userinfo})
+    else:
+        return redirect('/login')
+
 @csrf_exempt
-
-
 def login(request):
+    global userinfo
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -45,12 +48,9 @@ def login(request):
             
             if user_det is not None:
                 db_email, db_password = user_det[2],user_det[3]
-                print('here')
-                print('\n'*20)
-                print(db_email, db_password) 
                 if password == db_password:
-                    
-                    return render(request, 'index.html')
+                    userinfo=user_det
+                    return render(request, 'index.html',{'login':True,'userinfo':user_det})
                 else:
                     
                     return render(request, 'login.html', {'error': 'Incorrect password'})
