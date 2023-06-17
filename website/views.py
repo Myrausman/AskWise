@@ -25,8 +25,31 @@ def logout(request):
     return redirect("/")
 
 
+@csrf_exempt
 def ask_view(request):
-    return render(request, 'ask.html', {})
+    if request.method == 'POST':
+        question_title = request.POST.get('questionTitle')
+        question_details = request.POST.get('questionDetails')
+        tags = request.POST.get('tags').split(',')
+
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            # Save the question to the topics table
+            cursor.execute("INSERT INTO topic (title, details, email) VALUES (?, ?, ?)",
+                           (question_title, question_details, useremail)) 
+            # Retrieve the inserted topic_id
+            topic_id = cursor.lastrowid
+            # Save each tag along with the corresponding topic_id to the tags table
+            for tag in tags:
+                cursor.execute("INSERT INTO tags (topic_id, tag) VALUES (?, ?)",
+                               (topic_id, tag.strip()))
+            conn.commit()
+
+        return redirect('home')  # Redirect to the homepage after submitting the question
+
+    return render(request, 'ask.html')
+
+
 def mytopics_view(request):
     global userinfo
     if userinfo:
@@ -36,7 +59,7 @@ def mytopics_view(request):
 
 @csrf_exempt
 def login(request):
-    global userinfo
+    global userinfo ,useremail
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -51,6 +74,8 @@ def login(request):
                 db_email, db_password = user_det[2],user_det[3]
                 if password == db_password:
                     userinfo=user_det
+                    useremail=db_email
+                    print('\n' * 20 , userinfo)
                     return redirect('/')
                 else:
                     

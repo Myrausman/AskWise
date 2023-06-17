@@ -57,11 +57,12 @@
   <!-- Content Section -->
     <section class="container my-5">
         <h1>Ask a Question</h1>
-        <form>
+        <form method="POST" action="{% url 'ask_view' %}">
+          {% csrf_token %}
           <div class="mb-3">
             <label for="questionTitle" class="form-label">Question Title</label>
-            <form method="POST" action="{% url 'details' %}">
-              {% csrf_token %}
+            
+              
             <input type="text" class="form-control" id="questionTitle" placeholder="Enter your question title" name="questionTitle">
           </div>
           <div class="mb-3">
@@ -78,13 +79,13 @@
     </section>
 </div>
 </div>
-<hr class="m-0">
-  <!-- Footer -->
-  <footer class="bg-dark text-light text-center py-3">
-    <div class="container">
-      <p>&copy; 2023 Q&A Website. All rights reserved by Hamna and Maira.</p>
-    </div>
-  </footer>
+        <hr class="m-0">
+<!-- Footer -->
+<footer class="text-light text-center py-3" style="background-color: rgb(217, 54, 54)">
+  <div class="container">
+    <p>&copy; 2023 Online Forum. All rights reserved by Hamna and Maira.</p>
+  </div>
+</footer>
 
   <!-- jQuery and Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
