@@ -16,10 +16,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 userinfo=None
 #<----------- Create your views here.--------->
 def home(request):
-    # if request.method == 'POST':
-            # login = Login.objects.filter(email=request.POST.get('email')).first()
-            # return render(request, 'index.html', {'email':login.email,'login':True})
-    return render(request, 'index.html', {})
+   
+    return render(request, 'index.html',{'login':userinfo!=""})
 
 
 
