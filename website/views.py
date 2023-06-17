@@ -48,15 +48,15 @@ def login(request):
                 db_email, db_password = user_det[2],user_det[3]
                 print('here')
                 print('\n'*20)
-                print(db_email, db_password) # Extract email and password from the fetched user details
+                print(db_email, db_password) 
                 if password == db_password:
-                    # Login successful, proceed with further actions
+                    
                     return render(request, 'index.html')
                 else:
-                    # Incorrect password
+                    
                     return render(request, 'login.html', {'error': 'Incorrect password'})
             else:
-                # User not found
+                
                 return render(request, 'login.html', {'error': 'User not found'})
     
     return render(request, 'login.html')
