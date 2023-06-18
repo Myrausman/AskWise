@@ -161,26 +161,23 @@ def details(request, topic_id):
         column_names = [description[0] for description in cursor.description]
         topic = dict(zip(column_names, topic_details))
 
-        # answers for loop
-        # cursor.execute("SELECT reply_id , FROM replies WHERE topic_id = ?", (topic_id,))
-        # reply_details = cursor.fetchall()
 
-        # topics = []
-        #     for row in reply:
-        #         topics.append(row)
-        #         # Access the tags associated with the topic
-                
-        #         if tag_string:
-        #             topic['tags'] = tag_string.split(',')  # Split the tag string into a list
-        #         else:
-        #             topic['tags'] = []  # Set an empty list if no tags are present
-
+        
         if request.method == 'POST':
-            answer = request.POST.get('answer')
-            email=useremail
-            cursor.execute("INSERT INTO replies ( topic_id,details,email,likes) VALUES ( ?, ?, ?, ?)",
-                           ( topic_id,answer,email,0))
-            
+            if userinfo is None:
+                return redirect('/login') 
+            else:
+                answer = request.POST.get('answer')
+                email=useremail
+                cursor.execute("INSERT INTO replies ( topic_id,details,email,likes) VALUES ( ?, ?, ?, ?)",
+                            ( topic_id,answer,email,0))
+                return render(request, 'details.html', {'topic': topic})
+                
+        # Fetch replies from the database for the current topic
+        cursor.execute("SELECT * FROM replies WHERE topic_id = ?", (topic_id,))
+        reply_details = cursor.fetchall()
+        column_names = [description[0] for description in cursor.description]
+        replies = [dict(zip(column_names, reply)) for reply in reply_details]
 
             
     return render(request, 'details.html', {'topic': topic})
