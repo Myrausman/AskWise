@@ -101,6 +101,16 @@ def mytopics_view(request):
             return render(request, 'mytopics.html', {'topics': topics})
     else:
         return redirect('/login')
+@csrf_exempt    
+def delete_data(request,reply_id):
+    if request.method== "POST":
+        answer = request.POST.get('answer')
+        email=useremail
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM replies WHERE reply_id = ?", (reply_id,))
+            conn.commit()
+    return redirect("home") 
 
 @csrf_exempt
 def login(request):
@@ -171,18 +181,25 @@ def details(request, topic_id):
                 email=useremail
                 cursor.execute("INSERT INTO replies ( topic_id,details,email,likes) VALUES ( ?, ?, ?, ?)",
                             ( topic_id,answer,email,0))
-                return render(request, 'details.html', {'topic': topic})
-                
+               
         # Fetch replies from the database for the current topic
         cursor.execute("SELECT * FROM replies WHERE topic_id = ?", (topic_id,))
         reply_details = cursor.fetchall()
         column_names = [description[0] for description in cursor.description]
         replies = [dict(zip(column_names, reply)) for reply in reply_details]
-
             
-    return render(request, 'details.html', {'topic': topic})
+    return render(request, 'details.html', {'topic': topic,'replies':replies})
 
 
     
     
-
+@csrf_exempt      
+def update_data(request,reply_id):
+    if request.method== "POST":
+        answer = request.POST.get('answer')
+        email=useremail
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("UPDATE replies SET details = ? WHERE reply_id = ?", (answer,reply_id))
+            conn.commit()
+    return details()

@@ -8,6 +8,8 @@ urlpatterns = [
     path('login', login, name='login'),
     path('register', register, name='register'),
     path('details/<int:topic_id>/', details, name='details'),
-    path('logout',logout,name='logout')
+    path('logout',logout,name='logout'),
+    path('delete_data/<int:reply_id>/',delete_data,name='delete_data'),
+    path('update_data/<int:reply_id>/',delete_data,name='update_data')
 
 ]

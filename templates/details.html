@@ -93,32 +93,88 @@
       <div class="col-md-12">
         
         <div class="panel panel-default">
-       <form method="POST" id="reply">
+          {% for reply in replies %}
+       <form method="POST" action="{% url 'update_data' reply.reply_id %}">
           {% csrf_token %}
           <div class="panel-body">
-            {% for reply in replies %}
             <div class="d-flex align-items-center justify-content-between mb-3">
               <div>
-                <p>{{ reply.details }}</p>
+                <p id="details-{{ reply.reply_id }}">{{ reply.details }}</p>
+                <input type="text" id="edit-details-{{ reply.reply_id }}" class="form-control" style="display: none;">
                 <i>Answered by: {{ reply.email }}</i>
-                <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;" onclick="myFunction(this)"></i>
+                <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;"></i>
               </div>
               <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary" id="edit">
+                <button type="button" class="btn btn-outline-primary edit-button" data-reply-id="{{ reply.reply_id }}">
                   <i class="fa fa-pencil"></i> Edit
                 </button>
-                <button type="button" class="btn btn-outline-danger" id="delete">
+                <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
+                  <i class="fa fa-save"></i> Save
+                </button>
+              </form>
+            <form method="POST" action="{% url 'delete_data' reply.reply_id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger" id="delete">
                   <i class="fa fa-trash"></i> Delete
                 </button>
+              </form>
               </div>
             </div>
             {% endfor %}
           </div>
-        </form>
+        
         </div>
       </div>
       <hr> <!-- Section separator -->
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const editButtons = document.querySelectorAll('.edit-button');
+    
+        editButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const replyId = button.getAttribute('data-reply-id');
+            const details = document.querySelector('#details-' + replyId);
+            const editDetails = document.querySelector('#edit-details-' + replyId);
+            const saveButton = document.querySelector('#save-button-' + replyId);
+    
+            details.style.display = 'none';
+            editDetails.style.display = 'block';
+            editDetails.value = details.textContent;
+    
+            button.style.display = 'none';
+            saveButton.style.display = 'inline-block';
+          });
+        });
+    
+        const saveButtons = document.querySelectorAll('.save-button');
+    
+        saveButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const replyId = button.getAttribute('id').split('-')[2];
+            const editDetails = document.querySelector('#edit-details-' + replyId);
+            const updatedDetails = editDetails.value;
+    
+            fetch('/update_data/' + replyId + '/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+              },
+              body: JSON.stringify({ details: updatedDetails })
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the response if needed
+              console.log(data);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+          });
+        });
+      });
+    </script>
     
 
 <br>
