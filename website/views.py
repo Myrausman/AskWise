@@ -19,7 +19,18 @@ useremail = None
 # <----------- Create your views here.--------->
 def home(request):
     global userinfo
-    return render(request, 'index.html', {'login': userinfo != None})
+    with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute(""" SELECT * FROM topic  """)
+            rows = cursor.fetchall()
+            # Prepare the data as a list of dictionaries
+            column_names = [description[0] for description in cursor.description]
+            topics = []
+            for row in rows:
+                topic = dict(zip(column_names, row))
+                topics.append(topic)
+            print(topics)
+    return render(request, 'index.html', {'login': userinfo != None,'topics': topics})
 
 def logout(request):
     global userinfo, useremail
@@ -53,9 +64,25 @@ def ask_view(request):
 
 
 def mytopics_view(request):
-    global userinfo
+    global userinfo,useremail
     if userinfo:
-        return render(request, 'mytopics.html',{'userinfo':userinfo})
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+            SELECT topic.topic_id, topic.title, topic.details
+            FROM topic
+            JOIN users ON users.email = topic.email
+            WHERE users.email = ?
+            """, (useremail,))
+            rows = cursor.fetchall()
+            # Prepare the data as a list of dictionaries
+            column_names = [description[0] for description in cursor.description]
+            topics = []
+            for row in rows:
+                topic = dict(zip(column_names, row))
+                topics.append(topic)
+            print(topics)
+            return render(request, 'mytopics.html', {'topics': topics})
     else:
         return redirect('/login')
 
@@ -113,7 +140,19 @@ def register(request):
     return render (request,'register.html',{})
 
 
-def details(request):
+def details(request, topic_id):
+
+    print(topic_id)
+    with sqlite3.connect('datbase.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM topic WHERE topic_id = ?", (topic_id,))
+        topic_details = cursor.fetchone()
+        # Prepare the topic details as a dictionary
+        column_names = [description[0] for description in cursor.description]
+        topic = dict(zip(column_names, topic_details))
+
+    return render(request, 'details.html', {'topic': topic})
+
     # if request.method=='POST':
     #      questionTitle=request.POST['questionTitle']
     #      questionDetails=request.POST['questionDetails']
@@ -125,5 +164,3 @@ def details(request):
     #      )
     #      question.save()
         #  return redirect('/details')
-
-    return render (request,'details.html',{})

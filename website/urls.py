@@ -7,7 +7,7 @@ urlpatterns = [
     path('mytopics_view', mytopics_view, name='mytopics_view'),
     path('login', login, name='login'),
     path('register', register, name='register'),
-    path('details', details, name='details'),
+    path('details/<int:topic_id>/', details, name='details'),
     path('logout',logout,name='logout')
 
 ]

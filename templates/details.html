@@ -60,13 +60,19 @@
       </nav>
  <br>
  <br>
+
   <!-- Question and Answers -->
   <div class="container">
     <!-- Question Title and Description -->
     <div class="jumbotron border">
-      <h1>Dynamic HTML Table: Bootstrap, PHP, MySQL, JS/jQuery Filtering</h1>
-      <p>How would you dynamically generate a responsive HTML table using Bootstrap, populate it with data retrieved from a MySQL database using PHP, and then apply client-side filtering functionality using JavaScript and jQuery?</p>
-      <i>Asked by: Web_Is_Fun</i>
+      {% csrf_token %}
+      {% block content %}
+      <h1>{{ topic.title }}</h1>
+      <p>{{ topic.details }}</p>
+      {% comment %} <i>{{userinfo[1]}}</i> {% endcomment %}
+      <!-- Add more details as needed -->
+      {% endblock %}
+      
       
     </div>
   </div>
