@@ -33,6 +33,11 @@ a{
 .font-weight-bold {
     font-weight: 700 !important;
 }
+.nav-tabs .nav-link.active {
+  background-color: transparent;
+  border-color: #ddd;
+  border-bottom-color: transparent;
+}
 </style> 
 </head>
 <body>
@@ -55,12 +60,12 @@ a{
 					</a>
 				</div>
 
-				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<ul class="navbar-nav  nav-tabs ms-auto mb-2 mb-lg-0 ">
 					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
+						<a class="nav-link  text-white" aria-current="page" href="{% url 'home' %}">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-white" href="{% url 'mytopics_view' %}">My Topics</a>
+						<a class="nav-link active text-white" href="{% url 'mytopics_view' %}">My Topics</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

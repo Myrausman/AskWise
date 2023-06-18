@@ -118,28 +118,6 @@ def mytopics_view(request):
         return redirect('/login')
 
 
-    # global userinfo,useremail
-    # if userinfo:
-    #     with sqlite3.connect('datbase.db') as conn:
-    #         cursor = conn.cursor()
-    #         cursor.execute("""
-    #         SELECT topic.topic_id, topic.title, topic.details
-    #         FROM topic
-    #         JOIN users ON users.email = topic.email
-    #         WHERE users.email = ?
-    #         """, (useremail,))
-    #         rows = cursor.fetchall()
-    #         # Prepare the data as a list of dictionaries
-    #         column_names = [description[0] for description in cursor.description]
-    #         topics = []
-    #         for row in rows:
-    #             topic = dict(zip(column_names, row))
-    #             topics.append(topic)
-    #         print(topics)
-    #         return render(request, 'mytopics.html', {'topics': topics})
-    # else:
-    #     return redirect('/login')
-
 @csrf_exempt
 def login(request):
     global userinfo ,useremail

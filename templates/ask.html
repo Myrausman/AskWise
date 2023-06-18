@@ -9,7 +9,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
   <!-- Custom CSS -->
   <style>
-    /* Add your custom styles here */
+    .nav-tabs .nav-link.active {
+      background-color: transparent;
+      border-color: #ddd;
+      border-bottom-color: transparent;
+  }
   </style>
 </head>
 <body>
@@ -32,9 +36,9 @@
           </a>
         </div>
 
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav  nav-tabs ms-auto mb-2 mb-lg-0 ">
           <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link text-white" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'mytopics_view' %}">My Topics</a> 

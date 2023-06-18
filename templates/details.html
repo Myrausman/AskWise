@@ -17,6 +17,11 @@
     .answer{
         height:100px;
     }
+    .nav-tabs .nav-link.active {
+      background-color: transparent;
+      border-color: #ddd;
+      border-bottom-color: transparent;
+  }
 </style>
 </head>
 <body>
@@ -37,9 +42,9 @@
               </a>
             </div>
   
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav  nav-tabs ms-auto mb-2 mb-lg-0 ">
               <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
+                <a class="nav-link text-white" aria-current="page" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="{% url 'mytopics_view' %}">My Topics</a>
@@ -81,24 +86,39 @@
   <div class="container">
     <!-- Answers -->
 
-      <div class="col-md-12 container border ">
-        <h2>Answers:</h2>
-        <hr> <!-- Section separator -->
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-body d-flex align-items-center">
-              <div class="flex-grow-1">
-                <p>Answer 2</p>
-                <p>Another answer goes here.</p>
-                <i>Answered by: AnotherUser</i>
-              </div>
-              <div class="justify-content-end">
-                <i class="fa fa-thumbs-up" style="font-size: 24px;" onclick="myFunction(this)"></i>
-              </div>
+    <div class="col-md-12 container border">
+      <h2>Answers:</h2>
+      <hr> <!-- Section separator -->
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body d-flex align-items-center justify-content-between">
+            <div>
+              <p>Answer 2 </p>
+              
+              <p>Another answer goes here.</p>
+              <i>Answered by: AnotherUser</i>
+              <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;" onclick="myFunction(this)"></i>
+              
             </div>
+            
+            <div class="d-flex align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary">
+                  <i class="fa fa-pencil"></i> Edit
+                </button>
+                <button type="button" class="btn btn-outline-danger">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              
           </div>
         </div>
+        
+      </div>
         </div>
+      </div>
+    </div>
+    
+        
         <hr> <!-- Section separator -->
         <div class="col-md-12">
           <div class="panel panel-default">
