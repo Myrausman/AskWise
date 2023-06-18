@@ -20,17 +20,40 @@ useremail = None
 def home(request):
     global userinfo
     with sqlite3.connect('datbase.db') as conn:
-            cursor = conn.cursor()
-            cursor.execute(""" SELECT * FROM topic  """)
-            rows = cursor.fetchall()
-            # Prepare the data as a list of dictionaries
-            column_names = [description[0] for description in cursor.description]
-            topics = []
-            for row in rows:
-                topic = dict(zip(column_names, row))
-                topics.append(topic)
-            print(topics)
-    return render(request, 'index.html', {'login': userinfo != None,'topics': topics})
+        cursor = conn.cursor()
+        cursor.execute("""SELECT topic.topic_id, topic.title, topic.details, GROUP_CONCAT(tags.tag) AS tags
+                        FROM topic
+                        LEFT JOIN tags ON topic.topic_id = tags.topic_id
+                        GROUP BY topic.topic_id""")
+        rows = cursor.fetchall()
+        # Prepare the data as a list of dictionaries
+        column_names = [description[0] for description in cursor.description]
+        topics = []
+        for row in rows:
+            topic = dict(zip(column_names, row))
+            topics.append(topic)
+            # Access the tags associated with the topic
+            tag_string = topic['tags']
+            if tag_string:
+                topic['tags'] = tag_string.split(',')  # Split the tag string into a list
+            else:
+                topic['tags'] = []  # Set an empty list if no tags are present
+        print(topics)
+    return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
+
+    # global userinfo
+    # with sqlite3.connect('datbase.db') as conn:
+    #         cursor = conn.cursor()
+    #         cursor.execute(""" SELECT * FROM topic  """)
+    #         rows = cursor.fetchall()
+    #         # Prepare the data as a list of dictionaries
+    #         column_names = [description[0] for description in cursor.description]
+    #         topics = []
+    #         for row in rows:
+    #             topic = dict(zip(column_names, row))
+    #             topics.append(topic)
+    #         print(topics)
+    # return render(request, 'index.html', {'login': userinfo != None,'topics': topics})
 
 def logout(request):
     global userinfo, useremail
@@ -64,15 +87,17 @@ def ask_view(request):
 
 
 def mytopics_view(request):
-    global userinfo,useremail
+    global userinfo, useremail
     if userinfo:
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
             cursor.execute("""
-            SELECT topic.topic_id, topic.title, topic.details
+            SELECT topic.topic_id, topic.title, topic.details, GROUP_CONCAT(tags.tag) AS tags
             FROM topic
             JOIN users ON users.email = topic.email
+            LEFT JOIN tags ON topic.topic_id = tags.topic_id
             WHERE users.email = ?
+            GROUP BY topic.topic_id
             """, (useremail,))
             rows = cursor.fetchall()
             # Prepare the data as a list of dictionaries
@@ -81,10 +106,39 @@ def mytopics_view(request):
             for row in rows:
                 topic = dict(zip(column_names, row))
                 topics.append(topic)
+                # Access the tags associated with the topic
+                tag_string = topic['tags']
+                if tag_string:
+                    topic['tags'] = tag_string.split(',')  # Split the tag string into a list
+                else:
+                    topic['tags'] = []  # Set an empty list if no tags are present
             print(topics)
             return render(request, 'mytopics.html', {'topics': topics})
     else:
         return redirect('/login')
+
+
+    # global userinfo,useremail
+    # if userinfo:
+    #     with sqlite3.connect('datbase.db') as conn:
+    #         cursor = conn.cursor()
+    #         cursor.execute("""
+    #         SELECT topic.topic_id, topic.title, topic.details
+    #         FROM topic
+    #         JOIN users ON users.email = topic.email
+    #         WHERE users.email = ?
+    #         """, (useremail,))
+    #         rows = cursor.fetchall()
+    #         # Prepare the data as a list of dictionaries
+    #         column_names = [description[0] for description in cursor.description]
+    #         topics = []
+    #         for row in rows:
+    #             topic = dict(zip(column_names, row))
+    #             topics.append(topic)
+    #         print(topics)
+    #         return render(request, 'mytopics.html', {'topics': topics})
+    # else:
+    #     return redirect('/login')
 
 @csrf_exempt
 def login(request):

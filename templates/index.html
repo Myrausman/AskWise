@@ -89,26 +89,32 @@
     </div>
     {% for topic in topics %}
    
-           <div class="card-body py-3">
-              <div class="row no-gutters align-items-center">
-                 <div class="col">
-                  <a href="{% url 'details' topic.topic_id %}" class="text-primary">{{topic.title}}</a>
-                    <div class="text-muted small mt-1">Started 25 days ago &nbsp;&middot;&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">Neon Mandela</a></div>
-                 </div>
-                 <div class="d-none d-md-block col-4">
-                    <div class="row no-gutters align-items-center">
-                       <div class="col-4">12</div>
-                       <div class="media col-8 align-items-center">
-                          <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="" class="d-block ui-w-30 rounded-circle">
-                          <div class="media-body flex-truncate ml-2">
-                             <div class="line-height-1 text-truncate">1 day ago</div>
-                             <a href="javascript:void(0)" class="text-muted small text-truncate" data-abc="true">by Tim cook</a>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
+    <div class="card-body py-3">
+      <div class="row no-gutters align-items-center">
+         <div class="col">
+            <a href="{% url 'details' topic.topic_id %}" class="text-primary">{{topic.title}}</a>
+            <div class="text-muted small mt-1">Started 25 days ago &nbsp;&middot;&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">Neon Mandela</a></div>
+            <div class="topic-tags mt-2">
+               {% for tag in topic.tags %}
+               <span class="badge bg-primary">{{ tag }}</span>
+               {% endfor %}
+            </div>
+         </div>
+         <div class="d-none d-md-block col-4">
+            <div class="row no-gutters align-items-center">
+               <div class="col-4">12</div>
+               <div class="media col-8 align-items-center">
+                  <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="" class="d-block ui-w-30 rounded-circle">
+                  <div class="media-body flex-truncate ml-2">
+                     <div class="line-height-1 text-truncate">1 day ago</div>
+                     <a href="javascript:void(0)" class="text-muted small text-truncate" data-abc="true">by Tim cook</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   
   
            <hr class="m-0">
     {% endfor %}
