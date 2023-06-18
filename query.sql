@@ -25,3 +25,14 @@ CREATE TABLE "tags" (
 	FOREIGN KEY("topic_id") REFERENCES "topic"("topic_id")
 );
 
+CREATE TABLE "replies" (
+	"reply_id"	INTEGER,
+	"topic_id" INTEGER,
+	"details"	TEXT NOT NULL,
+	"email"	TEXT NOT NULL,
+	"created_at"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"updated_at"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	"likes" INTEGER,
+	FOREIGN KEY("topic_id") REFERENCES "topic"("topic_id"),
+	PRIMARY KEY("reply_id" AUTOINCREMENT)
+);
