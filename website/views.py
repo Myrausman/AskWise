@@ -38,22 +38,8 @@ def home(request):
                 topic['tags'] = tag_string.split(',')  # Split the tag string into a list
             else:
                 topic['tags'] = []  # Set an empty list if no tags are present
-        print(topics)
     return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
 
-    # global userinfo
-    # with sqlite3.connect('datbase.db') as conn:
-    #         cursor = conn.cursor()
-    #         cursor.execute(""" SELECT * FROM topic  """)
-    #         rows = cursor.fetchall()
-    #         # Prepare the data as a list of dictionaries
-    #         column_names = [description[0] for description in cursor.description]
-    #         topics = []
-    #         for row in rows:
-    #             topic = dict(zip(column_names, row))
-    #             topics.append(topic)
-    #         print(topics)
-    # return render(request, 'index.html', {'login': userinfo != None,'topics': topics})
 
 def logout(request):
     global userinfo, useremail
@@ -112,11 +98,9 @@ def mytopics_view(request):
                     topic['tags'] = tag_string.split(',')  # Split the tag string into a list
                 else:
                     topic['tags'] = []  # Set an empty list if no tags are present
-            print(topics)
             return render(request, 'mytopics.html', {'topics': topics})
     else:
         return redirect('/login')
-
 
 @csrf_exempt
 def login(request):
@@ -129,8 +113,6 @@ def login(request):
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM users WHERE email=?", (email,))
             user_det = cursor.fetchone()
-            print(user_det)
-            
             if user_det is not None:
                 db_email, db_password = user_det[2],user_det[3]
                 if password == db_password:
@@ -146,9 +128,6 @@ def login(request):
                 return render(request, 'login.html', {'error': 'User not found'})
     
     return render(request, 'login.html')
-
-
-
 
 @csrf_exempt
 def register(request):
@@ -171,10 +150,9 @@ def register(request):
 
     return render (request,'register.html',{})
 
-
+@csrf_exempt
 def details(request, topic_id):
-
-    print(topic_id)
+    global useremail
     with sqlite3.connect('datbase.db') as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM topic WHERE topic_id = ?", (topic_id,))
@@ -183,16 +161,31 @@ def details(request, topic_id):
         column_names = [description[0] for description in cursor.description]
         topic = dict(zip(column_names, topic_details))
 
+        # answers for loop
+        # cursor.execute("SELECT reply_id , FROM replies WHERE topic_id = ?", (topic_id,))
+        # reply_details = cursor.fetchall()
+
+        # topics = []
+        #     for row in reply:
+        #         topics.append(row)
+        #         # Access the tags associated with the topic
+                
+        #         if tag_string:
+        #             topic['tags'] = tag_string.split(',')  # Split the tag string into a list
+        #         else:
+        #             topic['tags'] = []  # Set an empty list if no tags are present
+
+        if request.method == 'POST':
+            answer = request.POST.get('answer')
+            email=useremail
+            cursor.execute("INSERT INTO replies ( topic_id,details,email,likes) VALUES ( ?, ?, ?, ?)",
+                           ( topic_id,answer,email,0))
+            
+
+            
     return render(request, 'details.html', {'topic': topic})
 
-    # if request.method=='POST':
-    #      questionTitle=request.POST['questionTitle']
-    #      questionDetails=request.POST['questionDetails']
-    #      tags=request.POST['tags']
-    #      question=Question.objects.create(
-    #           title=questionTitle,
-    #           details=questionDetails,
-    #           tag=tags
-    #      )
-    #      question.save()
-        #  return redirect('/details')
+
+    
+    
+
