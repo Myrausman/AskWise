@@ -7,7 +7,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>	
   <!-- Bootstrap CSS -->
-
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
   <title>AskWise</title>
 <style>
     .form-group{
@@ -85,16 +86,18 @@
         <hr> <!-- Section separator -->
         <div class="col-md-12">
           <div class="panel panel-default">
-            <div class="panel-body">
-              <p>
-                Answer 2
-              </p>
-              <p>
-                Another answer goes here.
-              </p>
-              <i>Answered by: AnotherUser</i>
+            <div class="panel-body d-flex align-items-center">
+              <div class="flex-grow-1">
+                <p>Answer 2</p>
+                <p>Another answer goes here.</p>
+                <i>Answered by: AnotherUser</i>
+              </div>
+              <div class="justify-content-end">
+                <i class="fa fa-thumbs-up" style="font-size: 24px;" onclick="myFunction(this)"></i>
+              </div>
             </div>
           </div>
+        </div>
         </div>
         <hr> <!-- Section separator -->
         <div class="col-md-12">
