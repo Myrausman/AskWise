@@ -196,8 +196,6 @@ def update_data(request, reply_id):
 
 
 
-
-
 @csrf_exempt    
 def delete_data(request,reply_id):
     if request.method== "POST":

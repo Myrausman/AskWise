@@ -113,19 +113,18 @@
                   <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
                     <i class="fa fa-save"></i> Save
                   </button>
-                  <a href="{% url 'delete_data' reply.reply_id %}" class="btn btn-outline-danger delete-button">
+                
+                <form method="POST" action="{% url 'delete_data' reply.reply_id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-danger" id="delete">
                     <i class="fa fa-trash"></i> Delete
-                  </a>
-                </div>
+                  </button>
+                </form>
+              </div>
               </div>
             </div>
           </form>
-            <form method="POST" action="{% url 'delete_data' reply.reply_id %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-outline-danger" id="delete">
-                  <i class="fa fa-trash"></i> Delete
-                </button>
-              </form>
+            
               </div>
               
             </div>
