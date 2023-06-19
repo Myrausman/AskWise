@@ -6,6 +6,7 @@ urlpatterns = [
     path('ask_view', ask_view, name='ask_view'),
     path('mytopics_view', mytopics_view, name='mytopics_view'),
     path('login', login, name='login'),
+    path('logout', logout, name='logout'),
     path('register', register, name='register'),
     path('details/<int:topic_id>/', details, name='details'),
     path('logout',logout,name='logout'),
