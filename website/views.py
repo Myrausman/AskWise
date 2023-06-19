@@ -53,10 +53,12 @@ def home(request):
         column_names = [description[0] for description in cursor.description]
         topics = []
         for row in rows:
+            
             topic = dict(zip(column_names, row))
             topics.append(topic)
             # Access the tags associated with the topic
             tag_string = topic['tags']
+            print(topic)
             if tag_string:
                 topic['tags'] = list(set(tag_string.split(',')))  # Remove duplicate tags
             else:
