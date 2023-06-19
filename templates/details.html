@@ -94,24 +94,32 @@
         
         <div class="panel panel-default">
           {% for reply in replies %}
-       <form method="POST" action="{% url 'update_data' reply.reply_id %}">
-          {% csrf_token %}
-          <div class="panel-body">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <div>
-                <p id="details-{{ reply.reply_id }}">{{ reply.details }}</p>
-                <input type="text" id="edit-details-{{ reply.reply_id }}" class="form-control" style="display: none;">
-                <i>Answered by: {{ reply.email }}</i>
-                <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;"></i>
+          <form method="POST" action="{% url 'update_data' reply.reply_id  %}">
+            {% csrf_token %}
+            <div class="panel-body">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <div>
+                  <input type="hidden" name="topic_id" value="{{ topic.topic_id }}">
+                  <p id="details-{{ reply.reply_id }}">{{ reply.details }}</p>
+                  <input type="text" name="answer" id="edit-details-{{ reply.reply_id }}" class="form-control" style="display: none;">
+                  <i>Answered by: {{ reply.email }}</i>
+                  <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;"></i>
+                </div>
+          
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-primary edit-button" data-reply-id="{{ reply.reply_id }}">
+                    <i class="fa fa-pencil"></i> Edit
+                  </button>
+                  <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                  <a href="{% url 'delete_data' reply.reply_id %}" class="btn btn-outline-danger delete-button">
+                    <i class="fa fa-trash"></i> Delete
+                  </a>
+                </div>
               </div>
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary edit-button" data-reply-id="{{ reply.reply_id }}">
-                  <i class="fa fa-pencil"></i> Edit
-                </button>
-                <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
-                  <i class="fa fa-save"></i> Save
-                </button>
-              </form>
+            </div>
+          </form>
             <form method="POST" action="{% url 'delete_data' reply.reply_id %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-outline-danger" id="delete">
@@ -119,13 +127,15 @@
                 </button>
               </form>
               </div>
+              
             </div>
+            <hr> <!-- Section separator -->
             {% endfor %}
           </div>
-        
+          
         </div>
       </div>
-      <hr> <!-- Section separator -->
+  
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
