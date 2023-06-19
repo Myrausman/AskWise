@@ -101,7 +101,7 @@
       <div class="row no-gutters align-items-center">
          <div class="col">
             <a href="{% url 'details' topic.topic_id %}" class="text-primary">{{topic.title}}</a>
-            <div class="text-muted small mt-1">Started 25 days ago &nbsp;&middot;&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">Neon Mandela</a></div>
+            <div class="text-muted small mt-1">Started {{topic.days_ago}} days ago &nbsp;&middot;&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">{{ topic.fname }} {{ topic.lname }}</a></div>
             <div class="topic-tags mt-2">
                {% for tag in topic.tags %}
                <span class="badge bg-primary">{{ tag }}</span>
