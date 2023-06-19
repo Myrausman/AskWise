@@ -162,7 +162,10 @@ def register(request):
 
 @csrf_exempt
 def details(request, topic_id):
-    global useremail
+
+    global useremail,userinfo
+    print(userinfo)
+        
     with sqlite3.connect('datbase.db') as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM topic WHERE topic_id = ?", (topic_id,))
@@ -187,19 +190,24 @@ def details(request, topic_id):
         reply_details = cursor.fetchall()
         column_names = [description[0] for description in cursor.description]
         replies = [dict(zip(column_names, reply)) for reply in reply_details]
+        
             
-    return render(request, 'details.html', {'topic': topic,'replies':replies})
+    return render(request, 'details.html', {'topic': topic,'replies':replies,'useremail':useremail})
 
 
     
     
+@csrf_exempt 
+
+
+
 @csrf_exempt      
-def update_data(request,reply_id):
-    if request.method== "POST":
+def update_data(request, reply_id):
+    if request.method == "POST":
         answer = request.POST.get('answer')
-        email=useremail
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("UPDATE replies SET details = ? WHERE reply_id = ?", (answer,reply_id))
+            cursor.execute("UPDATE replies SET details = ? WHERE reply_id = ?", (answer, reply_id))
             conn.commit()
-    return details()
+    return redirect('details', topic_id=request.POST.get('topic_id'))
+
