@@ -101,16 +101,7 @@ def mytopics_view(request):
             return render(request, 'mytopics.html', {'topics': topics})
     else:
         return redirect('/login')
-@csrf_exempt    
-def delete_data(request,reply_id):
-    if request.method== "POST":
-        answer = request.POST.get('answer')
-        email=useremail
-        with sqlite3.connect('datbase.db') as conn:
-            cursor = conn.cursor()
-            cursor.execute("DELETE FROM replies WHERE reply_id = ?", (reply_id,))
-            conn.commit()
-    return redirect("home") 
+
 
 @csrf_exempt
 def login(request):
@@ -197,8 +188,17 @@ def details(request, topic_id):
 
     
     
-@csrf_exempt 
-
+ 
+@csrf_exempt    
+def delete_data(request,reply_id):
+    if request.method== "POST":
+        answer = request.POST.get('answer')
+        email=useremail
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM replies WHERE reply_id = ?", (reply_id,))
+            conn.commit()
+    return details() 
 
 
 @csrf_exempt      
