@@ -95,43 +95,42 @@
       
       <div class="panel panel-default">
         {% for reply in replies %}
-        <form method="POST" action="{% url 'update_data' reply.reply_id  %}">
-          {% csrf_token %}
-          <div class="panel-body">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-              <div>
-                <input type="hidden" name="topic_id" value="{{ topic.topic_id }}">
-                {% if reply.email == useremail %}
-                <p id="details-{{ reply.reply_id }}">{{ reply.details }}</p>
-                <input type="text" name="answer" id="edit-details-{{ reply.reply_id }}" class="form-control" style="display: none;">
-                {% else %}
-                <p>{{ reply.details }}</p>
-                {% endif %}
-                <i>Answered by: {{ reply.email }}</i>
-                <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;"></i>
-              </div>
-              <div class="btn-group">
-                {% if reply.email == useremail %}
-                <button type="button" class="btn btn-outline-primary edit-button" data-reply-id="{{ reply.reply_id }}">
-                  <i class="fa fa-pencil"></i> Edit
+        <div class="panel-body">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div>
+              <input type="hidden" name="topic_id" value="{{ topic.topic_id }}">
+              {% if reply.email == useremail %}
+              <p id="details-{{ reply.reply_id }}">{{ reply.details }}</p>
+              <input type="text" name="answer" id="edit-details-{{ reply.reply_id }}" class="form-control" style="display: none;">
+              {% else %}
+              <p>{{ reply.details }}</p>
+              {% endif %}
+              <i>Answered by: {{ reply.email }}</i>
+              <i class="fa fa-thumbs-up" style="font-size: 20px; margin-left: 5px;"></i>
+            </div>
+            <div class="btn-group">
+              {% if reply.email == useremail %}
+              <button type="button" class="btn btn-outline-primary edit-button" data-reply-id="{{ reply.reply_id }}">
+                <i class="fa fa-pencil"></i> Edit
+              </button>
+              <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
+                <i class="fa fa-save"></i> Save
+              </button>
+              <form method="POST" action="{% url 'delete_data' reply.reply_id %}">
+                {% csrf_token %}
+                <input type="text" style="display: none;" name="topic_id" value="{{topic_id}}">
+                <button type="submit" class="btn btn-outline-danger">
+                  <i class="fa fa-trash"></i> Delete
                 </button>
-                <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
-                  <i class="fa fa-save"></i> Save
-                </button>
-                <form method="POST" action="{% url 'delete_data' reply.reply_id %}">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-outline-danger" id="delete">
-                    <i class="fa fa-trash"></i> Delete
-                  </button>
-                </form>
-                {% endif %}
-              </div>
+              </form>
+              {% endif %}
             </div>
           </div>
-        </form>
+        </div>
         <hr> <!-- Section separator -->
         {% endfor %}
       </div>
+      
       
     </div>
   </div>
