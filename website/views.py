@@ -183,14 +183,14 @@ def details(request, topic_id):
         replies = [dict(zip(column_names, reply)) for reply in reply_details]
         
             
-    return render(request, 'details.html', {'topic': topic,'replies':replies,'useremail':useremail})
+    return render(request, 'details.html', {'topic': topic,"topic_id"   :topic_id, 'replies':replies,'useremail':useremail})
   
 @csrf_exempt
 def delete_data(request, reply_id):
     if request.method == "POST":
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("DELETE * FROM replies WHERE reply_id = ?", (reply_id,))
+            cursor.execute("DELETE FROM replies WHERE reply_id = ?", (reply_id,))
             conn.commit()
     return redirect('details', topic_id=request.POST.get('topic_id'))
 
