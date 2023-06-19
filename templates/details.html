@@ -114,10 +114,10 @@
               <div >
                 {% if reply.email == useremail %}
                 <button type="button" class="btn btn-outline-primary edit-button" data-reply-id="{{ reply.reply_id }}">
-                  <i class="fa fa-pencil"></i> Edit
+                  <i class="fa fa-pencil"></i>
                 </button>
                 <button type="submit" class="btn btn-outline-primary save-button" id="save-button-{{ reply.reply_id }}" style="display: none;">
-                  <i class="fa fa-save"></i> Save
+                  <i class="fa fa-save"></i>
                 </button>
               </form></div>
               
@@ -125,7 +125,7 @@
                   {% csrf_token %}
                   <input type="hidden" name="topic_id" value="{{ topic.topic_id }}">
                   <button type="submit" class="btn btn-outline-danger" id="delete">
-                    <i class="fa fa-trash"></i> Delete
+                    <i class="fa fa-trash"></i>
                   </button>
                 </form></div>
                 {% endif %}
