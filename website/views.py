@@ -184,12 +184,8 @@ def details(request, topic_id):
         
             
     return render(request, 'details.html', {'topic': topic,'replies':replies,'useremail':useremail})
-
-
-    
-    
- 
-@csrf_exempt 
+  
+@csrf_exempt
 def delete_data(request, reply_id):
     if request.method == "POST":
         with sqlite3.connect('datbase.db') as conn:
