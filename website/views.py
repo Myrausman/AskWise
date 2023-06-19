@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
 import random
+from datetime import datetime, timedelta
 import string
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,16 +18,38 @@ userinfo = None
 useremail = None
 
 # <----------- Create your views here.--------->
+from django.db.models import Count
+# from .models import Reply  # Import the Reply model
+import sqlite3
+from datetime import datetime
+from django.shortcuts import render
+
 def home(request):
     global userinfo
     with sqlite3.connect('datbase.db') as conn:
         cursor = conn.cursor()
-        cursor.execute("""SELECT topic.topic_id, topic.title, topic.details, GROUP_CONCAT(tags.tag) AS tags, users.fname, users.lname
-                        FROM topic
-                        LEFT JOIN tags ON topic.topic_id = tags.topic_id
-                        LEFT JOIN users ON topic.email = users.email
-                        GROUP BY topic.topic_id""")
+        cursor.execute("""
+            SELECT
+                topic.topic_id,
+                topic.title,
+                topic.details,
+                topic.created_at,
+                COUNT(DISTINCT replies.reply_id) AS reply_count,
+                GROUP_CONCAT(tags.tag) AS tags,
+                users.fname,
+                users.lname
+            FROM
+                topic
+                LEFT JOIN tags ON topic.topic_id = tags.topic_id
+                LEFT JOIN users ON topic.email = users.email
+                LEFT JOIN replies ON topic.topic_id = replies.topic_id
+            GROUP BY
+                topic.topic_id
+            ORDER BY
+                topic.topic_id
+        """)
         rows = cursor.fetchall()
+        
         # Prepare the data as a list of dictionaries
         column_names = [description[0] for description in cursor.description]
         topics = []
@@ -36,10 +59,72 @@ def home(request):
             # Access the tags associated with the topic
             tag_string = topic['tags']
             if tag_string:
-                topic['tags'] = tag_string.split(',')  # Split the tag string into a list
+                topic['tags'] = tag_string.split(',')
             else:
-                topic['tags'] = []  # Set an empty list if no tags are present
+                topic['tags'] = []
+            # Calculate the "days ago" value
+            created_at = datetime.strptime(topic['created_at'], '%Y-%m-%d %H:%M:%S')
+            days_ago = (datetime.now() - created_at).days
+            topic['days_ago'] = days_ago
+            
     return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
+
+# def home(request):
+#     global userinfo
+#     with sqlite3.connect('datbase.db') as conn:
+#         cursor = conn.cursor()
+#         cursor.execute("""SELECT topic.topic_id, topic.title, topic.details, topic.created_at, GROUP_CONCAT(tags.tag) AS tags, users.fname, users.lname, COUNT(replies.reply_id) AS reply_count
+#                         FROM topic
+#                         LEFT JOIN tags ON topic.topic_id = tags.topic_id
+#                         LEFT JOIN users ON topic.email = users.email
+#                         LEFT OUTER JOIN replies ON topic.topic_id = replies.topic_id
+#                         GROUP BY topic.topic_id""")
+#         rows = cursor.fetchall()
+#         # Prepare the data as a list of dictionaries
+#         column_names = [description[0] for description in cursor.description]
+#         topics = []
+#         for row in rows:
+#             topic = dict(zip(column_names, row))
+#             topics.append(topic)
+#             # Access the tags associated with the topic
+#             tag_string = topic['tags']
+#             if tag_string:
+#                 topic['tags'] = tag_string.split(',')
+#             else:
+#                 topic['tags'] = []
+#             # Calculate the "days ago" value
+#             created_at = datetime.strptime(topic['created_at'], '%Y-%m-%d %H:%M:%S')
+#             days_ago = (datetime.now() - created_at).days
+#             topic['days_ago'] = days_ago
+#     return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
+
+# def home(request):
+#     global userinfo
+#     with sqlite3.connect('datbase.db') as conn:
+#         cursor = conn.cursor()
+#         cursor.execute("""SELECT topic.topic_id, topic.title, topic.details,topic.created_at, GROUP_CONCAT(tags.tag) AS tags, users.fname, users.lname
+#                         FROM topic
+#                         LEFT JOIN tags ON topic.topic_id = tags.topic_id
+#                         LEFT JOIN users ON topic.email = users.email
+#                         GROUP BY topic.topic_id""")
+#         rows = cursor.fetchall()
+#         # Prepare the data as a list of dictionaries
+#         column_names = [description[0] for description in cursor.description]
+#         topics = []
+#         for row in rows:
+#             topic = dict(zip(column_names, row))
+#             topics.append(topic)
+#             # Access the tags associated with the topic
+#             tag_string = topic['tags']
+#             if tag_string:
+#                 topic['tags'] = tag_string.split(',')  # Split the tag string into a list
+#             else:
+#                 topic['tags'] = []  # Set an empty list if no tags are present
+#             # Calculate the "days ago" value
+#             created_at = datetime.strptime(topic['created_at'], '%Y-%m-%d %H:%M:%S')
+#             days_ago = (datetime.now() - created_at).days
+#             topic['days_ago'] = days_ago
+#     return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
 
 # def home(request):
 #     global userinfo
