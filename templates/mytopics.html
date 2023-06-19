@@ -97,7 +97,7 @@ a{
       </h5>
       <div class="text-sm op-5">
        
-        <a class="text-black mr-2" href="#">{{topic.details}}</a>
+        <a class="text-black mr-2" href="#">{{topic.details|safe}}</a>
         <br>
         {% for tag in topic.tags %}
         <a class="badge bg-primary" href="#">{{tag}}</a>

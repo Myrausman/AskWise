@@ -29,7 +29,7 @@ def home(request):
                 topic.details,
                 topic.created_at,
                 COUNT(DISTINCT replies.reply_id) AS reply_count,
-                GROUP_CONCAT(tags.tag) AS tags,
+                GROUP_CONCAT(DISTINCT tags.tag) AS tags,
                 users.fname,
                 users.lname
             FROM
@@ -52,7 +52,6 @@ def home(request):
             topics.append(topic)
             # Access the tags associated with the topic
             tag_string = topic['tags']
-            print(topic)
             if tag_string:
                 topic['tags'] = tag_string.split(',')  # Split the tag string into a list
             else:
