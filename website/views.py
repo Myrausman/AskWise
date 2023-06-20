@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
 import random
+from django.contrib import messages
 from datetime import datetime, timedelta
 import string
 
@@ -244,7 +245,8 @@ def register(request):
             cursor = conn.cursor()
             cursor.execute("INSERT INTO users ( fname, lname, email, password, gender) VALUES ( ?, ?, ?, ?, ?)",
                            ( first_name, last_name, email, password, gender))
-        request.session['registration_success'] = True
+        messages.success(request, 'You have been registered successfully! Please log in to continue.')
+
         return redirect('login')
 
     return render (request,'register.html',{})
@@ -309,7 +311,9 @@ def delete_topic(request, topic_id):
     if request.method == "POST":
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("""cursor.execute("DELETE FROM replies WHERE topic_id = ?""", (topic_id,))
+            cursor.execute("DELETE FROM topic WHERE topic_id = ?", (topic_id,))
+            cursor.execute("DELETE FROM replies WHERE topic_id = ?", (topic_id,))
+            cursor.execute("DELETE FROM tags WHERE topic_id = ?", (topic_id,))
             conn.commit()
     return redirect('mytopics_view')
 
