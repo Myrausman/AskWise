@@ -42,3 +42,16 @@ ASKWISE is an online forum project developed for the DBMS (Database Management S
     ```bash
         http://localhost:8000
 
+## Contributing
+    -Contributions to ASKWISE are welcome! If you would like to contribute, please follow these steps:
+
+    - Fork the repository.
+    - Create a new branch for your feature or bug fix.
+    - Make your changes and commit them.
+    - Push your changes to your forked repository.
+    - Submit a pull request detailing your changes.
+## License
+This project is licensed under the MIT License.
+
+## Acknowledgements
+    Special thanks to  [Samadpls](https://github.com/samadpls) for developing and sharing this project.
