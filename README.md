@@ -52,6 +52,14 @@ ASKWISE is an online forum project developed for the DBMS (Database Management S
     - Submit a pull request detailing your changes.
 ## License
 This project is licensed under the MIT License.
+## License
+This project is licensed under the MIT License.
 
 ## Acknowledgements
-   `Special thanks to  [Samadpls](https://github.com/samadpls) for developing and sharing this project.
+Special thanks to Samadpls ([GitHub](https://github.com/samadpls)) for his invaluable mentorship, guidance, and contribution to the development of ASKWISE. His expertise and support were instrumental in shaping the project and ensuring its success. We are grateful for his dedication and commitment throughout the development process.
+
+### Collaborators:
+- Maira Usman: [GitHub](https://github.com/Myrausman)
+- Hamna Mohiuddin: [GitHub](https://github.com/hamnamohi)
+
+We would also like to express our gratitude to our talented collaborators, Maira Usman and Hamna Mohiuddin. Their hard work, technical skills, and collaboration significantly contributed to the implementation and enhancement of ASKWISE. Their commitment to the project and innovative ideas were invaluable in creating a user-friendly and efficient online forum.
