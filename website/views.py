@@ -70,6 +70,64 @@ def home(request):
             
     return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
 
+
+
+def search(request):
+    global userinfo
+    if request.method == 'GET':
+        query = request.GET.get('search')
+        query=query.lower()
+    with sqlite3.connect('datbase.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT topic.topic_id,
+                topic.title,
+                topic.details,
+                topic.created_at,
+                COUNT(DISTINCT replies.reply_id) AS reply_count,
+                GROUP_CONCAT(DISTINCT tags.tag) AS tags,
+                users.fname,
+                users.lname
+            FROM
+                topic
+                LEFT JOIN tags ON topic.topic_id = tags.topic_id 
+                LEFT JOIN users ON topic.email = users.email
+                LEFT JOIN replies ON topic.topic_id = replies.topic_id
+            WHERE tags.tag = ?
+            GROUP BY
+                topic.topic_id
+            ORDER BY
+                topic.topic_id
+        """,(query,))
+        rows = cursor.fetchall()
+        
+        # Prepare the data as a list of dictionaries
+        column_names = [description[0] for description in cursor.description]
+        topics = []
+        for row in rows:
+            
+            topic = dict(zip(column_names, row))
+            topics.append(topic)
+            # Access the tags associated with the topic
+            tag_string = topic['tags']
+            print(topic)
+            if tag_string:
+                topic['tags'] = list(set(tag_string.split(',')))  # Remove duplicate tags
+            else:
+                topic['tags'] = []
+            # Calculate the "days ago" value
+            created_at = datetime.strptime(topic['created_at'], '%Y-%m-%d %H:%M:%S')
+            days_ago = (datetime.now() - created_at).days
+            topic['days_ago'] = days_ago
+            
+    return render(request, 'search.html', {'login': userinfo is not None, 'topics': topics})
+
+
+
+
+
+
+
 def logout(request):
     global userinfo, useremail
     userinfo = None
@@ -81,7 +139,8 @@ def ask_view(request):
     if request.method == 'POST':
         question_title = request.POST.get('questionTitle')
         question_details = request.POST.get('questionDetails')
-        tags = request.POST.get('tags').split(',')
+        # tags = request.POST.get('tags').split(',')
+        tags = [tag.lower() for tag in request.POST.get('tags').split(',')]
 
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
