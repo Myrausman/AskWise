@@ -58,7 +58,6 @@ def home(request):
             topics.append(topic)
             # Access the tags associated with the topic
             tag_string = topic['tags']
-            print(topic)
             if tag_string:
                 topic['tags'] = list(set(tag_string.split(',')))  # Remove duplicate tags
             else:
@@ -166,12 +165,21 @@ def mytopics_view(request):
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
             cursor.execute("""
-            SELECT topic.topic_id, topic.title, topic.details, GROUP_CONCAT(tags.tag) AS tags
-            FROM topic
-            JOIN users ON users.email = topic.email
-            LEFT JOIN tags ON topic.topic_id = tags.topic_id
+            SELECT 
+                topic.topic_id, 
+                topic.title, 
+                topic.details,
+                COUNT(DISTINCT replies.reply_id) AS reply_count, 
+                GROUP_CONCAT(DISTINCT tags.tag) AS tags
+            FROM 
+                topic
+                JOIN users ON users.email = topic.email
+                LEFT JOIN tags ON topic.topic_id = tags.topic_id
+                LEFT JOIN replies ON topic.topic_id = replies.topic_id
             WHERE users.email = ?
-            GROUP BY topic.topic_id
+            GROUP BY
+                topic.topic_id
+            
             """, (useremail,))
             rows = cursor.fetchall()
             # Prepare the data as a list of dictionaries
@@ -294,3 +302,22 @@ def update_data(request, reply_id):
             conn.commit()
     return redirect('details', topic_id=request.POST.get('topic_id'))
 
+@csrf_exempt
+def delete_topic(request, topic_id):
+    if request.method == "POST":
+        with sqlite3.connect('datbase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM topic WHERE topic_id = ?", (topic_id,))
+            conn.commit()
+    return redirect('mytopics_view')
+
+
+# @csrf_exempt      
+# def update_topic(request, topic_id):
+#     if request.method == "POST":
+#         answer = request.POST.get('answer')
+#         with sqlite3.connect('datbase.db') as conn:
+#             cursor = conn.cursor()
+#             cursor.execute("UPDATE topic SET details = ? WHERE topic_id = ?", (answer, topic_id))
+#             conn.commit()
+#     return redirect('mytopics_view')
