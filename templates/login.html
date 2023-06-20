@@ -133,12 +133,14 @@
     }
   </style>
 </head>
-<body>
-  
+
+
   <div class="login-reg-panel">
+  
     <div class="login-info-box">
       <h2>--------------------</h2>
       <p>-----------------------------------------</p>
+      
       <label id="label-register" for="log-reg-show">Login</label>
       <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
     </div>
@@ -149,9 +151,17 @@
       <a href="{% url 'register' %}">
         <input type="button" value="Register">
       </a>
+      {% if messages %}
+      <ul class="messages" style="color: rgb(63, 253, 5)">
+        {% for message in messages %}
+          <p class="text-center" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
+      </ul>
+    {% endif %}
     </div>
 
     <div class="white-panel">
+     
       <div class="login-show">
         <h2>LOGIN</h2>
         <form method="POST" action="{% url 'login' %}">

@@ -9,7 +9,6 @@ urlpatterns = [
     path('logout', logout, name='logout'),
     path('register', register, name='register'),
     path('details/<int:topic_id>/', details, name='details'),
-    path('logout',logout,name='logout'),
     path('delete_data/<int:reply_id>/',delete_data,name='delete_data'),
     path('update_data/<int:reply_id>/',update_data,name='update_data'),
     path('delete_topic/<int:topic_id>/',delete_topic,name='delete_topic'),

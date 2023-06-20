@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import sqlite3
 import random
+from django.contrib import messages
 from datetime import datetime, timedelta
 import string
 
@@ -62,7 +63,7 @@ def home(request):
             topic['days_ago'] = days_ago
     return render(request, 'index.html', {'login': userinfo is not None, 'topics': topics})
 
-
+@csrf_exempt
 def logout(request):
     global userinfo, useremail
     userinfo = None
@@ -177,6 +178,7 @@ def register(request):
             cursor = conn.cursor()
             cursor.execute("INSERT INTO users ( fname, lname, email, password, gender) VALUES ( ?, ?, ?, ?, ?)",
                            ( first_name, last_name, email, password, gender))
+        messages.success(request, 'You have been registered successfully! Please log in to continue.')
 
         return redirect('login')
 
@@ -243,6 +245,7 @@ def delete_topic(request, topic_id):
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
             cursor.execute("DELETE FROM topic WHERE topic_id = ?", (topic_id,))
+            cursor.execute("DELETE FROM replies WHERE topic_id = ?", (topic_id,))
             conn.commit()
     return redirect('mytopics_view')
 
