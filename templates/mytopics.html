@@ -74,7 +74,7 @@ a{
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 							<li><button class="dropdown-item" type="button">View Profile</button></li>
-							<li><button class="dropdown-item" type="button" href="{% url 'logout' %}">Logout</button></li>
+							<li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><button class="dropdown-item" type="button">Settings</button></li>
 						</ul>
@@ -131,6 +131,7 @@ a{
   </div>
 </div>
 {% endfor %}
+</div>
 
           <hr class="m-0">
           <!-- Footer -->
