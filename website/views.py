@@ -202,6 +202,7 @@ def mytopics_view(request):
 @csrf_exempt
 def login(request):
     global userinfo ,useremail
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -223,6 +224,7 @@ def login(request):
             else:
                 
                 return render(request, 'login.html', {'error': 'User not found'})
+            
     
     return render(request, 'login.html')
 
@@ -242,7 +244,7 @@ def register(request):
             cursor = conn.cursor()
             cursor.execute("INSERT INTO users ( fname, lname, email, password, gender) VALUES ( ?, ?, ?, ?, ?)",
                            ( first_name, last_name, email, password, gender))
-
+        request.session['registration_success'] = True
         return redirect('login')
 
     return render (request,'register.html',{})
@@ -307,17 +309,8 @@ def delete_topic(request, topic_id):
     if request.method == "POST":
         with sqlite3.connect('datbase.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM topic WHERE topic_id = ?", (topic_id,))
+            cursor.execute("""cursor.execute("DELETE FROM replies WHERE topic_id = ?""", (topic_id,))
             conn.commit()
     return redirect('mytopics_view')
 
 
-# @csrf_exempt      
-# def update_topic(request, topic_id):
-#     if request.method == "POST":
-#         answer = request.POST.get('answer')
-#         with sqlite3.connect('datbase.db') as conn:
-#             cursor = conn.cursor()
-#             cursor.execute("UPDATE topic SET details = ? WHERE topic_id = ?", (answer, topic_id))
-#             conn.commit()
-#     return redirect('mytopics_view')
