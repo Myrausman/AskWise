@@ -54,4 +54,4 @@ ASKWISE is an online forum project developed for the DBMS (Database Management S
 This project is licensed under the MIT License.
 
 ## Acknowledgements
-    Special thanks to  [Samadpls](https://github.com/samadpls) for developing and sharing this project.
+   `Special thanks to  [Samadpls](https://github.com/samadpls) for developing and sharing this project.
